@@ -1,0 +1,120 @@
+<main
+  class="container d-flex justify-content-center align-items-center min-vh-100"
+>
+  <div class="row border shadow bg-white rounded-4">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-lg-6">
+          <img
+            src="https://img.freepik.com/free-vector/user-verification-unauthorized-access-prevention-private-account-authentication-cyber-security-people-entering-login-password-safety-measures_335657-3530.jpg"
+            alt="registration_pic"
+            class="img-fluid"
+          />
+        </div>
+        <div class="col-lg-6">
+          <h1 class="text-center font-monospace border-bottom mt-4">Přidej se mezi nás!</h1>
+          <mat-vertical-stepper linear="true">
+            <mat-step [stepControl]="userDetailsForm" completed="false">
+              <form [formGroup]="userDetailsForm">
+                <ng-template matStepLabel>Osobní údaje</ng-template>
+
+                <mat-form-field class="w-100 py-1" appearance="outline">
+                  <mat-label>Křestní jméno</mat-label>
+                  <input matInput placeholder="Petr" formControlName="firstName" required minlength="2"/>
+
+                  <mat-error class="fs-6 text-danger">
+                    <small *ngIf="userDetailsFormControl.firstName.errors?.['required']">Musíte vyplnit toto pole!</small>
+                    <small *ngIf="userDetailsFormControl.firstName.errors?.['minlength']">Minimální délka je 2 znaky!</small>
+                    <small *ngIf="!userDetailsFormControl.firstName.errors?.['minlength'] && userDetailsFormControl.firstName.errors?.['pattern']">Jméno obsahuje nepovolené znaky!</small>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 py-1" appearance="outline">
+                  <mat-label>Příjmení</mat-label>
+                  <input matInput placeholder="Novák" formControlName="lastName" required minlength="2"/>
+
+                  <mat-error class="fs-6 text-danger">
+                    <small *ngIf="userDetailsFormControl.lastName.errors?.['required']">Musíte vyplnit toto pole!</small>
+                    <small *ngIf="userDetailsFormControl.lastName.errors?.['minlength']">Minimální délka je 2 znaky!</small>
+                    <small *ngIf="!userDetailsFormControl.lastName.errors?.['minlength'] && userDetailsFormControl.lastName.errors?.['pattern']">Příjmení obsahuje nepovolené znaky!</small>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 py-1" appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input matInput placeholder="Petr.novak@gmail.com" formControlName="email" required/>
+
+                  <mat-error class="fs-6 text-danger">
+                    <small *ngIf="userDetailsFormControl.email.errors?.['required']">Musíte vyplnit toto pole!</small>
+                    <small *ngIf="userDetailsFormControl.email.errors?.['pattern']">Zadejte validní email!</small>
+                  </mat-error>
+                </mat-form-field>
+                <div class="d-flex w-100 justify-content-center">
+                  <button mat-button matStepperNext class="btn btn-outline-warning px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-arrow-down fs-4"></i></button>                        
+                </div>
+            </form>
+            </mat-step>
+            <mat-step [stepControl]="accountDetailsForm" completed="false">
+              <form [formGroup]="accountDetailsForm">
+                <ng-template matStepLabel>Přihlašovací údaje</ng-template>
+
+                <mat-form-field class="w-100 py-1" appearance="outline">
+                  <mat-label>Přihlašovací jméno</mat-label>
+                  <input matInput placeholder="Petr98" formControlName="username" required minlength="3" maxlength="30"/>
+
+                  <mat-error class="fs-6 text-danger">
+                    <small *ngIf="accountDetailsFormControl.username.errors?.['required']">Musíte vyplnit toto pole!</small>
+                    <small *ngIf="accountDetailsFormControl.username.errors?.['minlength']">Minimální délka je 3 znaky!</small>
+                    <small *ngIf="accountDetailsFormControl.username.errors?.['maxlength']">Maximální délka je 30 znaků!</small>
+                    <small *ngIf="!accountDetailsFormControl.username.errors?.['minlength'] && accountDetailsFormControl.username.errors?.['pattern']">Přezdívka obsahuje nepovolené znaky!</small>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 py-1" appearance="outline">
+                  <mat-label>Heslo</mat-label>
+                  <input type="password" matInput formControlName="password" required minlength="8"/>
+
+                  <mat-error class="fs-6 text-danger">
+                    <small *ngIf="accountDetailsFormControl.password.errors?.['required']">Musíte vyplnit toto pole!</small>
+                    <small *ngIf="accountDetailsFormControl.password.errors?.['minlength']">Minimální délka je 8 znaků!</small>
+                    <small *ngIf="!accountDetailsFormControl.password.errors?.['minlength'] && accountDetailsFormControl.password.errors?.['pattern']">Heslo musí obsahovat pouze 1 malý znak, 1 velký znak a 1 číslo!</small>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 py-1" appearance="outline">
+                  <mat-label>Potvrzení hesla</mat-label>
+                  <input type="password" matInput formControlName="confirmPassword" required />
+
+                  <mat-error class="fs-6 text-danger">
+                    <small *ngIf="accountDetailsFormControl.confirmPassword.errors?.['required']">Musíte vyplnit toto pole!</small>
+                    <small *ngIf="!accountDetailsFormControl.confirmPassword.errors?.['required'] && !accountDetailsFormControl.password.errors?.['pattern']">Hesla nejsou stejná!</small>
+                  </mat-error>
+                </mat-form-field>
+
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <button [disabled]="this.loadingService.getLoading()" mat-button matStepperPrevious class="btn btn-outline-danger px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-arrow-up fs-4"></i></button>                                      
+           
+                  <div *ngIf="this.loadingService.getLoading()" class="spinner-grow text-warning fs-4" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  
+                  <button [disabled]="this.loadingService.getLoading()" (click)="onSubmit()" mat-button class="btn btn-outline-success px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-check-lg fs-4"></i></button> 
+                </div>
+
+                
+              </form>
+            </mat-step>
+          </mat-vertical-stepper>
+        </div>
+      </div>
+      <div class="row">
+        <small class="w-100 text-center fw-light mb-2 fs-6"
+          >Máte již účet?
+          <a routerLink="/login" class="text-decoration-none"
+            >Přihlaste se zde!</a
+          >
+        </small>
+      </div>
+    </div>
+  </div>
+</main>

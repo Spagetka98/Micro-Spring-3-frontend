@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../services/api/auth.service';
-import { StorageService } from '../services/storage/storage.service';
+import { AuthService } from '../../services/api/auth.service';
+import { StorageService } from '../../services/storage/storage.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LoadingService } from '../services/helpers/loading.service';
+import { LoadingService } from '../../services/helpers/loading.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,8 +17,8 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
   errorMessage: string = 'errorMessage';
-  isSubmitted: boolean = false;
   isLoginFailed: boolean = false;
+  isPasswordHidden: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,15 +33,15 @@ export class LoginComponent {
   }
 
   public onSubmit(): void {
-    this.isSubmitted = true;
+    this.loginFormControl.username.markAsTouched();
+    this.loginFormControl.password.markAsTouched();
 
-    if (!this.loginForm.value.username || !this.loginForm.value.password)
-      return;
+    if (this.loginForm.invalid) return;
 
     this.loadingService.setLoading(true);
 
     this.authService
-      .login(this.loginForm.value.username, this.loginForm.value.password)
+      .login(this.loginForm.value.username!, this.loginForm.value.password!)
       .subscribe({
         next: (data) => {
           this.isLoginFailed = false;
