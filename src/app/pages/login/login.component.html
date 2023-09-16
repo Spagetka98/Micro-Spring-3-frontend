@@ -53,15 +53,15 @@
                 class="btn btn-warning fs-6"
                 type="button"
                 (click)="onSubmit()"
-                [disabled]="this.loadingService.getLoading()"
+                [disabled]="isLoading"
               >
                 <span
                   class="spinner-border spinner-border-sm"
                   aria-hidden="true"
-                  *ngIf="this.loadingService.getLoading()"
+                  *ngIf="isLoading"
                 ></span>
                 <span role="status">{{
-                  this.loadingService.getLoading()
+                  isLoading
                     ? " Přihlašování..."
                     : " Přihlásit se!"
                 }}</span>
@@ -82,7 +82,7 @@
           [ngClass]="{ 'opacity-0': !isLoginFailed }"
           class="text-danger pe-none text-center fs-6 text-bg-danger bg-opacity-10 py-1 fw-bold mt-3 mt-lg-0"
         >
-          {{ errorMessage }}
+          {{ errorMessage || "MESSAGE"}}
         </div>
       </div>
     </div>

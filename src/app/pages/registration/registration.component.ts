@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { IRegistration } from 'src/app/models/registration.model';
 import { AuthService } from 'src/app/services/api/auth.service';
-import { LoadingService } from 'src/app/services/helpers/loading.service';
-import Validation from 'src/app/services/validator/matchpassword.validator';
+import Validation from './validator/matchpassword.validator';
 
 @Component({
   selector: 'app-registration',
@@ -16,11 +16,12 @@ export class RegistrationComponent {
   private USERNAME_REGEX: string = '^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9])+[a-zA-Z0-9]$';
   private PASSWORD_REGEX: string = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=\\S+$).+$';
   
-  message: string = "";
+  message: string | undefined;
   isPasswordHidden: boolean = true;
   isConfirmPasswordHidden: boolean = true;
   isRegistrationFailed: boolean = false;
   isRegistrationSuccess: boolean = false;
+  isLoading: boolean = false;
 
   userDetailsForm = this.formBuilder.group({
     firstName: ['', 
@@ -50,8 +51,8 @@ export class RegistrationComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
-    public loadingService: LoadingService) {}
+    private authService: AuthService
+  ) {}
   
   get userDetailsFormControl() {
     return this.userDetailsForm.controls;
@@ -64,24 +65,24 @@ export class RegistrationComponent {
   onSubmit(): void{
     if(this.userDetailsForm.invalid || this.accountDetailsForm.invalid) return;
 
-    this.loadingService.setLoading(true);
+    this.isLoading = true;
+    this.message = undefined;
+
+    const registrationRequest: IRegistration = {
+      username: this.accountDetailsForm.value.username,
+      firstName: this.userDetailsForm.value.firstName,
+      lastName: this.userDetailsForm.value.lastName,
+      email: this.userDetailsForm.value.email,
+      password: this.accountDetailsForm.value.password
+    };
 
     this.authService
-      .register(
-        this.accountDetailsForm.value.username!,
-        this.userDetailsForm.value.firstName!,
-        this.userDetailsForm.value.lastName!,
-        this.userDetailsForm.value.email!,
-        this.accountDetailsForm.value.password!)
+      .register(registrationRequest)
       .subscribe({
-        next: () => {
-          this.displaySuccessMessage();
-        },
-        error: (err) => { 
-         this.displayErrorMessage(err);
-        },
+        next: () => this.displaySuccessMessage(),
+        error: (err: HttpErrorResponse) => this.displayErrorMessage(err),
       })
-      .add(() => this.loadingService.setLoading(false));
+      .add(() => this.isLoading = false);
   }
 
   private displaySuccessMessage(): void {

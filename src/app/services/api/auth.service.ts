@@ -1,31 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import {AuthApiPath,UserApiPath} from "../environment/environment";
+import { LoginApi, RegisterApi, LogoutApi } from './api.path';
+import { IUser } from 'src/app/models/user.model';
+import { IRegistration } from 'src/app/models/registration.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  public login(username: string, password: string): Observable<any> {
-    let loginUrl: string = AuthApiPath.Login;
-
-    return this.http.post(loginUrl,{username,password});
+  public login(username: string, password: string): Observable<IUser> {
+    return this.http.post<IUser>(LoginApi, { username, password });
   }
 
-  public register(username: string, firstName:string, lastName:string, email: string, password: string): Observable<any> {
-    let registerUrl: string = AuthApiPath.Register;
-
-    return this.http.post(registerUrl,{username,firstName,lastName,email,password},);
+  public register(registration: IRegistration): Observable<{}> {
+    return this.http.post(RegisterApi, registration);
   }
 
-  public logout(): Observable<any> {
-    let logoutUrl: string = UserApiPath.Logout;
-
-    return this.http.get(logoutUrl)
+  public logout(): Observable<{}> {
+    return this.http.get(LogoutApi);
   }
 }

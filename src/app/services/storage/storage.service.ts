@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../model/user.model';
+import { IUser } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +13,13 @@ export class StorageService {
     window.sessionStorage.clear();
   }
 
-  public saveUserToStorage(user: User): void {
+  public saveUserToStorage(user: IUser): void {
     window.sessionStorage.removeItem(this.USER_KEY);
     window.sessionStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
 
   
-  public getUserFromStorage(): User | null {
+  public getUserFromStorage(): IUser | null {
     const user = window.sessionStorage.getItem(this.USER_KEY);
 
     return user ? JSON.parse(user) : null;

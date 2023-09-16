@@ -9,7 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { HomeComponent } from './pages/home/home.component';
 
-import { httpInterceptorProviders } from './services/helpers/auth.interceptor';
+import { httpInterceptorProviders } from './interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatInputModule} from '@angular/material/input';

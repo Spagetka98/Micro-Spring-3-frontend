@@ -98,13 +98,13 @@
 
                 <div class="d-flex flex-column">
                   <div class="d-flex w-100 justify-content-between align-items-center">
-                    <button [disabled]="this.loadingService.getLoading()" mat-button matStepperPrevious class="btn btn-outline-danger px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-arrow-up fs-4"></i></button>                                      
+                    <button [disabled]="isLoading" mat-button matStepperPrevious class="btn btn-outline-danger px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-arrow-up fs-4"></i></button>                                      
             
-                    <div *ngIf="this.loadingService.getLoading()" class="spinner-grow text-warning fs-4" role="status">
+                    <div *ngIf="isLoading" class="spinner-grow text-warning fs-4" role="status">
                       <span class="visually-hidden">Loading...</span>
                     </div>
                     
-                    <button [disabled]="this.loadingService.getLoading()" (click)="onSubmit()" mat-button class="btn btn-outline-success px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-check-lg fs-4"></i></button> 
+                    <button [disabled]="isLoading" (click)="onSubmit()" mat-button class="btn btn-outline-success px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-check-lg fs-4"></i></button> 
                           
                   </div>
                   <small class="w-100 text-center mt-4 fs-6" [ngClass]="{'text-success' : isRegistrationSuccess,'text-danger' : isRegistrationFailed}">{{message}}</small>
