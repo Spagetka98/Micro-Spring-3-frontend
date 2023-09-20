@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { IRegistration } from 'src/app/models/registration.model';
 import { AuthService } from 'src/app/services/api/auth.service';
 import Validation from './validator/matchpassword.validator';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-registration',
@@ -23,7 +24,7 @@ export class RegistrationComponent {
   isRegistrationSuccess: boolean = false;
   isLoading: boolean = false;
 
-  userDetailsForm = this.formBuilder.group({
+  userDetailsForm = this._formBuilder.group({
     firstName: ['', 
       [Validators.required, Validators.min(2), Validators.pattern(this.NAME_REGEX)]
     ],
@@ -35,7 +36,7 @@ export class RegistrationComponent {
     ],
   });
 
-  accountDetailsForm = this.formBuilder.group({
+  accountDetailsForm = this._formBuilder.group({
     username: ['',
       [Validators.required, Validators.min(3), Validators.max(30), Validators.pattern(this.USERNAME_REGEX)]
     ],
@@ -50,8 +51,9 @@ export class RegistrationComponent {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService
+    private _formBuilder: FormBuilder,
+    private _authService: AuthService,
+    private _translate: TranslateService
   ) {}
   
   get userDetailsFormControl() {
@@ -76,7 +78,7 @@ export class RegistrationComponent {
       password: this.accountDetailsForm.value.password
     };
 
-    this.authService
+    this._authService
       .register(registrationRequest)
       .subscribe({
         next: () => this.displaySuccessMessage(),
@@ -89,7 +91,7 @@ export class RegistrationComponent {
     this.isRegistrationFailed = false;
     this.isRegistrationSuccess = true;
 
-    this.message = "V pořádku! Na Váš email jsme Vám zaslali aktivační email!"
+    this._translate.get("REGISTRATION.SUCCESS").subscribe(data => this.message = data)
   }
 
   private displayErrorMessage(error: HttpErrorResponse): void {
@@ -97,11 +99,11 @@ export class RegistrationComponent {
     this.isRegistrationSuccess = false;
 
     if(error.status == 409 && error.error.message.toLocaleLowerCase().includes("email"))
-      this.message = "Tento email je již zabraný!";
+      this._translate.get("REGISTRATION.EMAIL_TAKEN").subscribe(data => this.message = data)
     else if(error.status == 409 && error.error.message.toLocaleLowerCase().includes("username"))
-      this.message = "Toto přihlašovací jméno je již zabrané!";
+      this._translate.get("REGISTRATION.NAME_TAKEN").subscribe(data => this.message = data)
     else
-      this.message = "Oops! Něco se u nás pokazilo"
+      this._translate.get("REGISTRATION.SERVER_ERROR").subscribe(data => this.message = data)
   }
   
 }

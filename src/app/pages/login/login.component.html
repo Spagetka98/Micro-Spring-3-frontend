@@ -1,31 +1,31 @@
 <main
   class="container d-flex flex-column justify-content-center align-items-center min-vh-100"
 >
-  <div class="row border rounded-4 bg-white shadow w-lg-75 overflow-hidden">
+  <div class="row rounded-4 bg-white shadow w-lg-75 overflow-hidden purple">
     <div class="col-12">
       <div class="row">
         <div class="col-lg-6">
           <img
             src="https://img.freepik.com/free-vector/hand-drawn-phoenix_23-2148486871.jpg"
             alt="login_pic"
-            class="img-fluid"
+            class="img-fluid pe-none"
           />
         </div>
         <div class="col-lg-6 d-flex">
           <form [formGroup]="loginForm" class="d-flex flex-column w-100 justify-content-evenly">
-            <h1 class="border-bottom mb-3 mb-lg-0 font-monospace">Vítejte !</h1>
+            <h1 class="border-bottom mb-3 mb-lg-0 font-monospace">{{"LOGIN.TITLE" | translate}}</h1>
 
             <mat-form-field class="w-100 py-1 mt-4" appearance="outline">
-              <mat-label>Přihlašovací jméno</mat-label>
+              <mat-label>{{"LOGIN.USERNAME_TITLE" | translate}}</mat-label>
               <input matInput formControlName="username" required />
 
               <mat-error class="fs-6 text-danger pt-1">
-                <small *ngIf="loginFormControl.username.errors?.['required']">Zadejte přihlašovací jméno!</small>
+                <small *ngIf="loginFormControl.username.errors?.['required']">{{"LOGIN.USERNAME_REQUIRED" | translate}}</small>
               </mat-error>
             </mat-form-field>
 
             <mat-form-field class="w-100 py-1" appearance="outline">
-              <mat-label>Heslo</mat-label>
+              <mat-label>{{"LOGIN.PASSWORD_TITLE" | translate}}</mat-label>
               <input
                 matInput
                 [type]="isPasswordHidden ? 'password' : 'text'"
@@ -44,13 +44,13 @@
               </button>
 
               <mat-error class="fs-6 text-danger">
-                <small *ngIf="loginFormControl.password.errors?.['required']">Zadejte heslo!</small>
+                <small *ngIf="loginFormControl.password.errors?.['required']">{{"LOGIN.PASSWORD_REQUIRED" | translate}}</small>
               </mat-error>
             </mat-form-field>
 
             <div class="d-flex flex-column w-100">
               <button
-                class="btn btn-warning fs-6"
+                class="btn btn-warning fs-6 shadow"
                 type="button"
                 (click)="onSubmit()"
                 [disabled]="isLoading"
@@ -60,18 +60,14 @@
                   aria-hidden="true"
                   *ngIf="isLoading"
                 ></span>
-                <span role="status">{{
-                  isLoading
-                    ? " Přihlašování..."
-                    : " Přihlásit se!"
-                }}</span>
+                <span role="status"> {{ isLoading ? ("LOGIN.LOGGING_IN" | translate) : ("LOGIN.LOG_IN"  | translate)}}</span>
               </button>
 
               <small class="align-self-center mt-3 fw-light">
-                Nemáte účet? <a routerLink="/registration" class="text-decoration-none">Udělejte si jeden zde!</a>
+                {{"LOGIN.ACCOUNT.MISSING" | translate}} <a routerLink="/registration" class="text-decoration-none">{{"LOGIN.ACCOUNT.CREATE_LINK" | translate}}</a>
               </small>
               <small class="align-self-center mt-1 fw-light">
-                Nebo? <a href="#" class="text-decoration-none">Jste jen zapomněl heslo?</a>
+                {{"LOGIN.PASSWORD.OR" | translate}} <a href="#" class="text-decoration-none">{{"LOGIN.PASSWORD.RESET_LINK" | translate}}</a>
               </small>
             </div>
           </form>
@@ -79,7 +75,7 @@
       </div>
       <div class="row">
         <div
-          [ngClass]="{ 'opacity-0': !isLoginFailed }"
+          [ngClass]="{ 'opacity-0': !isLoginFailed || !errorMessage }"
           class="text-danger pe-none text-center fs-6 text-bg-danger bg-opacity-10 py-1 fw-bold mt-3 mt-lg-0"
         >
           {{ errorMessage || "MESSAGE"}}

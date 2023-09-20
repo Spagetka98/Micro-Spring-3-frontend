@@ -5,6 +5,7 @@ import { StorageService } from '../../services/storage/storage.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/models/user.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent {
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
     private _storageService: StorageService,
-    private _routerService: Router
+    private _routerService: Router,
+    private _translate: TranslateService
   ) {}
 
   get loginFormControl() {
@@ -61,15 +63,15 @@ export class LoginComponent {
 
     switch (error.status) {
       case 401: {
-        this.errorMessage = 'Špatné jméno nebo heslo!';
+        this._translate.get("LOGIN.ERRORS.WRONG_CREDENTIALS").subscribe(data => this.errorMessage = data)
         break;
       }
       case 423: {
-        this.errorMessage = 'První ověřte svůj email!';
+        this._translate.get("LOGIN.ERRORS.UNVERIFIED_EMAIL").subscribe(data => this.errorMessage = data)
         break;
       }
       default: {
-        this.errorMessage = 'Server není dostupný!';
+        this._translate.get("LOGIN.ERRORS.SERVER_ERROR").subscribe(data => this.errorMessage = data)
         break;
       }
     }

@@ -1,7 +1,7 @@
 <main
   class="container d-flex justify-content-center align-items-center min-vh-100"
 >
-  <div class="row border shadow bg-white rounded-4 overflow-hidden">
+  <div class="row shadow bg-white rounded-4 overflow-hidden purple">
     <div class="col-12">
       <div class="row">
         <div class="col-lg-6">
@@ -12,41 +12,41 @@
           />
         </div>
         <div class="col-lg-6">
-          <h1 class="text-center font-monospace border-bottom mt-4">Přidej se mezi nás!</h1>
+          <h1 class="text-center font-monospace border-bottom mt-4">{{"REGISTRATION.TITLE" | translate}}</h1>
           <mat-vertical-stepper linear="true">
             <mat-step [stepControl]="userDetailsForm" completed="false">
               <form [formGroup]="userDetailsForm">
-                <ng-template matStepLabel>Osobní údaje</ng-template>
-
+                <ng-template matStepLabel>{{"REGISTRATION.DETAILS_FORM.TITLE" | translate}}</ng-template>
+                
                 <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>Křestní jméno</mat-label>
+                  <mat-label>{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.TITLE" | translate}}</mat-label>
                   <input matInput placeholder="Petr" formControlName="firstName" required minlength="2"/>
 
                   <mat-error class="fs-6 text-danger">
-                    <small *ngIf="userDetailsFormControl.firstName.errors?.['required']">Musíte vyplnit toto pole!</small>
-                    <small *ngIf="userDetailsFormControl.firstName.errors?.['minlength']">Minimální délka je 2 znaky!</small>
-                    <small *ngIf="!userDetailsFormControl.firstName.errors?.['minlength'] && userDetailsFormControl.firstName.errors?.['pattern']">Jméno obsahuje nepovolené znaky!</small>
+                    <small *ngIf="userDetailsFormControl.firstName.errors?.['required']">{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.REQUIRED" | translate}}</small>
+                    <small *ngIf="userDetailsFormControl.firstName.errors?.['minlength']">{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.MIN_LENGTH" | translate}}</small>
+                    <small *ngIf="!userDetailsFormControl.firstName.errors?.['minlength'] && userDetailsFormControl.firstName.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.PATTERN" | translate}}</small>
                   </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>Příjmení</mat-label>
+                  <mat-label>{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.TITLE" | translate}}</mat-label>
                   <input matInput placeholder="Novák" formControlName="lastName" required minlength="2"/>
 
                   <mat-error class="fs-6 text-danger">
-                    <small *ngIf="userDetailsFormControl.lastName.errors?.['required']">Musíte vyplnit toto pole!</small>
-                    <small *ngIf="userDetailsFormControl.lastName.errors?.['minlength']">Minimální délka je 2 znaky!</small>
-                    <small *ngIf="!userDetailsFormControl.lastName.errors?.['minlength'] && userDetailsFormControl.lastName.errors?.['pattern']">Příjmení obsahuje nepovolené znaky!</small>
+                    <small *ngIf="userDetailsFormControl.lastName.errors?.['required']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.REQUIRED" | translate}}</small>
+                    <small *ngIf="userDetailsFormControl.lastName.errors?.['minlength']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.REQUIRED" | translate}}</small>
+                    <small *ngIf="!userDetailsFormControl.lastName.errors?.['minlength'] && userDetailsFormControl.lastName.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.REQUIRED" | translate}}</small>
                   </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>Email</mat-label>
+                  <mat-label>{{"REGISTRATION.DETAILS_FORM.EMAIL_INPUT.TITLE" | translate}}</mat-label>
                   <input matInput placeholder="Petr.novak@gmail.com" formControlName="email" required/>
 
                   <mat-error class="fs-6 text-danger">
-                    <small *ngIf="userDetailsFormControl.email.errors?.['required']">Musíte vyplnit toto pole!</small>
-                    <small *ngIf="userDetailsFormControl.email.errors?.['pattern']">Zadejte validní email!</small>
+                    <small *ngIf="userDetailsFormControl.email.errors?.['required']">{{"REGISTRATION.DETAILS_FORM.EMAIL_INPUT.REQUIRED" | translate}}</small>
+                    <small *ngIf="userDetailsFormControl.email.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.EMAIL_INPUT.PATTERN" | translate}}</small>
                   </mat-error>
                 </mat-form-field>
                 <div class="d-flex w-100 justify-content-center">
@@ -56,43 +56,43 @@
             </mat-step>
             <mat-step [stepControl]="accountDetailsForm" completed="false">
               <form [formGroup]="accountDetailsForm">
-                <ng-template matStepLabel>Přihlašovací údaje</ng-template>
+                <ng-template matStepLabel>{{"REGISTRATION.ACCOUNT_FORM.TITLE" | translate}}</ng-template>
 
                 <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>Přihlašovací jméno</mat-label>
+                  <mat-label>{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.TITLE" | translate}}</mat-label>
                   <input matInput placeholder="Petr98" formControlName="username" required minlength="3" maxlength="30"/>
 
                   <mat-error class="fs-6 text-danger">
-                    <small *ngIf="accountDetailsFormControl.username.errors?.['required']">Musíte vyplnit toto pole!</small>
-                    <small *ngIf="accountDetailsFormControl.username.errors?.['minlength']">Minimální délka je 3 znaky!</small>
-                    <small *ngIf="accountDetailsFormControl.username.errors?.['maxlength']">Maximální délka je 30 znaků!</small>
-                    <small *ngIf="!accountDetailsFormControl.username.errors?.['minlength'] && accountDetailsFormControl.username.errors?.['pattern']">Přezdívka obsahuje nepovolené znaky!</small>
+                    <small *ngIf="accountDetailsFormControl.username.errors?.['required']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.REQUIRED" | translate}}</small>
+                    <small *ngIf="accountDetailsFormControl.username.errors?.['minlength']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.MIN_LENGTH" | translate}}</small>
+                    <small *ngIf="accountDetailsFormControl.username.errors?.['maxlength']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.MAX_LENGTH" | translate}}</small>
+                    <small *ngIf="!accountDetailsFormControl.username.errors?.['minlength'] && accountDetailsFormControl.username.errors?.['pattern']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.PATTERN" | translate}}</small>
                   </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>Heslo</mat-label>
+                  <mat-label>{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.TITLE" | translate}}</mat-label>
                   <input [type]="isPasswordHidden ? 'password' : 'text'" matInput formControlName="password" required minlength="8"/>
                   <button class="hide" mat-icon-button matSuffix (click)="isPasswordHidden = !isPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordHidden">
                     <mat-icon>{{isPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
                   </button>
                   <mat-error class="fs-6 text-danger">
-                    <small *ngIf="accountDetailsFormControl.password.errors?.['required']">Musíte vyplnit toto pole!</small>
-                    <small *ngIf="accountDetailsFormControl.password.errors?.['minlength']">Minimální délka je 8 znaků!</small>
-                    <small *ngIf="!accountDetailsFormControl.password.errors?.['minlength'] && accountDetailsFormControl.password.errors?.['pattern']">Heslo musí obsahovat pouze 1 malý znak, 1 velký znak a 1 číslo!</small>
+                    <small *ngIf="accountDetailsFormControl.password.errors?.['required']">{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.REQUIRED" | translate}}</small>
+                    <small *ngIf="accountDetailsFormControl.password.errors?.['minlength']">{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.MIN_LENGTH" | translate}}</small>
+                    <small *ngIf="!accountDetailsFormControl.password.errors?.['minlength'] && accountDetailsFormControl.password.errors?.['pattern']">{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.PATTERN" | translate}}</small>
                   </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>Potvrzení hesla</mat-label>
+                  <mat-label>{{"REGISTRATION.ACCOUNT_FORM.CORRECT_PASSWORD_INPUT.TITLE" | translate}}</mat-label>
                   <input [type]="isConfirmPasswordHidden ? 'password' : 'text'" matInput formControlName="confirmPassword" required />
                   <button class="hide" mat-icon-button matSuffix (click)="isConfirmPasswordHidden = !isConfirmPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isConfirmPasswordHidden">
                     <mat-icon>{{isConfirmPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
                   </button>
 
                   <mat-error class="fs-6 text-danger">
-                    <small *ngIf="accountDetailsFormControl.confirmPassword.errors?.['required']">Musíte vyplnit toto pole!</small>
-                    <small *ngIf="!accountDetailsFormControl.confirmPassword.errors?.['required'] && !accountDetailsFormControl.password.errors?.['pattern']">Hesla nejsou stejná!</small>
+                    <small *ngIf="accountDetailsFormControl.confirmPassword.errors?.['required']">{{"REGISTRATION.ACCOUNT_FORM.CORRECT_PASSWORD_INPUT.REQUIRED" | translate}}</small>
+                    <small *ngIf="!accountDetailsFormControl.confirmPassword.errors?.['required'] && !accountDetailsFormControl.password.errors?.['matching']">{{"REGISTRATION.ACCOUNT_FORM.CORRECT_PASSWORD_INPUT.NOT_MATCHING" | translate}}</small>
                   </mat-error>
                 </mat-form-field>
 
@@ -116,11 +116,8 @@
         </div>
       </div>
       <div class="row">
-        <small class="w-100 text-center fw-light mb-2 fs-6"
-          >Máte již účet?
-          <a routerLink="/login" class="text-decoration-none"
-            >Přihlaste se zde!</a
-          >
+        <small class="w-100 text-center fw-light mb-2 fs-6">{{"REGISTRATION.ACCOUNT" | translate}} 
+          <a routerLink="/login" class="text-decoration-none">{{"REGISTRATION.ACCOUNT_LINK" | translate}}</a>
         </small>
       </div>
     </div>

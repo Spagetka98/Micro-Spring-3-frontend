@@ -1,0 +1,74 @@
+{
+    "LOGIN": {
+        "TITLE": "Vítejte !",
+        "USERNAME_TITLE": "Přihlašovací jméno",
+        "USERNAME_REQUIRED": "Zadejte přihlašovací jméno!",
+        "PASSWORD_TITLE": "Heslo",
+        "PASSWORD_REQUIRED": "Zadejte heslo!",
+        "LOG_IN": "Přihlásit se!",
+        "LOGGING_IN": "Přihlašování...",
+        "ACCOUNT": {
+            "MISSING": "Nemáte účet?",
+            "CREATE_LINK": "Udělejte si jeden zde!"
+        },
+        "PASSWORD": {
+            "OR": "Nebo?",
+            "RESET_LINK": "Jste jen zapomněl heslo?"
+        },
+        "ERRORS": {
+            "WRONG_CREDENTIALS": "Špatné jméno nebo heslo!",
+            "UNVERIFIED_EMAIL": "První ověřte svůj email!",
+            "SERVER_ERROR": "Server není dostupný!"
+        }
+    },
+    "REGISTRATION": {
+        "TITLE": "Přidej se mezi nás!",
+        "DETAILS_FORM": {
+            "TITLE":"Osobní údaje",
+            "FIRST_NAME_INPUT": {
+                "TITLE": "Křestní jméno",
+                "REQUIRED": "Musíte vyplnit toto pole!",
+                "MIN_LENGTH": "Minimální délka jsou 2 znaky!",
+                "PATTERN": "Jméno obsahuje nepovolené znaky!"
+            },
+            "LAST_NAME_INPUT": {
+                "TITLE": "Příjmení",
+                "REQUIRED": "Musíte vyplnit toto pole!",
+                "MIN_LENGTH": "Minimální délka jsou 2 znaky!",
+                "PATTERN": "Příjmení obsahuje nepovolené znaky!"
+            },
+            "EMAIL_INPUT": {
+                "TITLE": "Email",
+                "REQUIRED": "Musíte vyplnit toto pole!",
+                "PATTERN": "Zadejte validní email!"
+            }  
+        },
+        "ACCOUNT_FORM": {
+            "TITLE": "Přihlašovací údaje",
+            "USERNAME_INPUT": {
+                "TITLE": "Přihlašovací jméno",
+                "REQUIRED": "Musíte vyplnit toto pole!",
+                "MIN_LENGTH": "Minimální délka jsou 2 znaky!",
+                "MAX_LENGTH": "Maximální délka je 30 znaků!",
+                "PATTERN": "Přezdívka obsahuje nepovolené znaky!"
+            },
+            "PASSWORD_INPUT": {
+                "TITLE": "Heslo",
+                "REQUIRED": "Musíte vyplnit toto pole!",
+                "MIN_LENGTH": "Minimální délka je 8 znaků!",
+                "PATTERN": "Heslo musí obsahovat pouze 1 malý znak, 1 velký znak a 1 číslo!"
+            },
+            "CORRECT_PASSWORD_INPUT": {
+                "TITLE": "Potvrzení hesla",
+                "REQUIRED": "Musíte vyplnit toto pole!",
+                "NOT_MATCHING": "Hesla nejsou stejná!"
+            }
+        },
+        "ACCOUNT": "Máte již účet?",
+        "ACCOUNT_LINK": "Přihlaste se zde!",
+        "SUCCESS": "V pořádku! Na Váš email jsme Vám zaslali aktivační email!",
+        "EMAIL_TAKEN": "Tento email je již zabraný!",
+        "NAME_TAKEN": "Toto přihlašovací jméno je již zabrané!",
+        "SERVER_ERROR": "Oops! Něco se u nás pokazilo"
+    }
+}
