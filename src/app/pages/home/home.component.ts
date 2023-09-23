@@ -1,5 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/api/auth.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +11,17 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient){
+  eventSub?: Subscription;
+
+  constructor(
+    private http: HttpClient,
+    private _auth: AuthService,
+    private _storage: StorageService){
 
   }
 
   ngOnInit(): void {
+
     fetch("/api/test/endpoint")
       .then(data => console.log(data));
 

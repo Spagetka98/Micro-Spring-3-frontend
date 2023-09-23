@@ -18,7 +18,8 @@
         "ERRORS": {
             "WRONG_CREDENTIALS": "Špatné jméno nebo heslo!",
             "UNVERIFIED_EMAIL": "První ověřte svůj email!",
-            "SERVER_ERROR": "Server není dostupný!"
+            "SERVER_ERROR": "Server není dostupný!",
+            "EXPIRATION": "Vaše relace vypršela!"
         }
     },
     "REGISTRATION": {

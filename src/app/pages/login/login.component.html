@@ -75,7 +75,7 @@
       </div>
       <div class="row">
         <div
-          [ngClass]="{ 'opacity-0': !isLoginFailed || !errorMessage }"
+          [ngClass]="{ 'opacity-0': !isErrorReceived || !errorMessage }"
           class="text-danger pe-none text-center fs-6 text-bg-danger bg-opacity-10 py-1 fw-bold mt-3 mt-lg-0"
         >
           {{ errorMessage || "MESSAGE"}}

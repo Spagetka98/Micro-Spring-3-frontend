@@ -18,7 +18,7 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
   errorMessage: string | undefined;
-  isLoginFailed: boolean = false;
+  isErrorReceived: boolean = false;
   isPasswordHidden: boolean = true;
   isLoading: boolean = false;
 
@@ -27,8 +27,13 @@ export class LoginComponent {
     private _authService: AuthService,
     private _storageService: StorageService,
     private _routerService: Router,
-    private _translate: TranslateService
-  ) {}
+    private _translate: TranslateService,
+  ) {
+    if(history.state?.loginExpiration){
+      this._translate.get("LOGIN.ERRORS.EXPIRATION").subscribe(data => this.errorMessage = data)
+      this.isErrorReceived = true;
+    }  
+  }
 
   get loginFormControl() {
     return this.loginForm.controls;
@@ -53,14 +58,15 @@ export class LoginComponent {
   }
 
   private handleSuccess(user: IUser): void{
-    this.isLoginFailed = false;
+    this.isErrorReceived = false;
+
     this._storageService.saveUserToStorage(user);
     this._routerService.navigate(['home']);
   }
 
   private handleError(error: HttpErrorResponse): void {
-    this.isLoginFailed = true;
-
+    this.isErrorReceived = true;
+    
     switch (error.status) {
       case 401: {
         this._translate.get("LOGIN.ERRORS.WRONG_CREDENTIALS").subscribe(data => this.errorMessage = data)

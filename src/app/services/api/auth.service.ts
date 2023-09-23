@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { LoginApi, RegisterApi, LogoutApi } from './api.path';
@@ -10,17 +10,17 @@ import { IRegistration } from 'src/app/models/registration.model';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
   public login(username: string, password: string): Observable<IUser> {
-    return this.http.post<IUser>(LoginApi, { username, password });
+    return this._http.post<IUser>(LoginApi, { username, password });
   }
 
   public register(registration: IRegistration): Observable<{}> {
-    return this.http.post(RegisterApi, registration);
+    return this._http.post(RegisterApi, registration);
   }
 
   public logout(): Observable<{}> {
-    return this.http.get(LogoutApi);
+    return this._http.get(LogoutApi);
   }
 }
