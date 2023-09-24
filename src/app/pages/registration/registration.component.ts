@@ -5,18 +5,14 @@ import { IRegistration } from 'src/app/models/registration.model';
 import { AuthService } from 'src/app/services/api/auth.service';
 import Validation from './validator/matchpassword.validator';
 import { TranslateService } from '@ngx-translate/core';
+import { EMAIL_REGEX, NAME_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from 'src/app/services/regex/regex.service';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
 })
-export class RegistrationComponent {
-  private NAME_REGEX: string = "^[A-ža-ž]+$";
-  private EMAIL_REGEX: string = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$';
-  private USERNAME_REGEX: string = '^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9])+[a-zA-Z0-9]$';
-  private PASSWORD_REGEX: string = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=\\S+$).+$';
-  
+export class RegistrationComponent {  
   message: string | undefined;
   isPasswordHidden: boolean = true;
   isConfirmPasswordHidden: boolean = true;
@@ -26,22 +22,22 @@ export class RegistrationComponent {
 
   userDetailsForm = this._formBuilder.group({
     firstName: ['', 
-      [Validators.required, Validators.min(2), Validators.pattern(this.NAME_REGEX)]
+      [Validators.required, Validators.min(2), Validators.pattern(NAME_REGEX)]
     ],
     lastName: ['',
-      [Validators.required, Validators.min(2), Validators.pattern(this.NAME_REGEX)]
+      [Validators.required, Validators.min(2), Validators.pattern(NAME_REGEX)]
     ],
     email: ['',
-      [Validators.required, Validators.pattern(this.EMAIL_REGEX)]
+      [Validators.required, Validators.pattern(EMAIL_REGEX)]
     ],
   });
 
   accountDetailsForm = this._formBuilder.group({
     username: ['',
-      [Validators.required, Validators.min(3), Validators.max(30), Validators.pattern(this.USERNAME_REGEX)]
+      [Validators.required, Validators.min(3), Validators.max(30), Validators.pattern(USERNAME_REGEX)]
     ],
     password: ['', 
-      [Validators.required, Validators.min(8), Validators.pattern(this.PASSWORD_REGEX)]
+      [Validators.required, Validators.min(8), Validators.pattern(PASSWORD_REGEX)]
     ],
     confirmPassword: ['',
       [Validators.required]

@@ -6,6 +6,8 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { EmptyLayoutComponent } from './layouts/empty.layout';
 import { NavbarLayoutComponent } from './layouts/navbar.layout';
 import { AuthGuard } from './services/auth/authguard.service';
+import { ForgetPassEmailComponent } from './pages/forget-pass-email/forget-pass-email.component';
+import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,18 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'forgetPassword',
+        component: ForgetPassEmailComponent
+      },
+      {
+        path: 'resetPassword/:token',
+        component: ResetPassComponent
+      },
+      {
+        path: 'resetPassword',
+        component: ResetPassComponent
       },
       {
         path: 'registration',

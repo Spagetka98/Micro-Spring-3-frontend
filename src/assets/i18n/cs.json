@@ -71,5 +71,39 @@
         "EMAIL_TAKEN": "Tento email je již zabraný!",
         "NAME_TAKEN": "Toto přihlašovací jméno je již zabrané!",
         "SERVER_ERROR": "Oops! Něco se u nás pokazilo"
+    },
+    "FORGET_PASS": {
+        "TITLE": "Změna hesla!",
+        "HINT": "Na vložený email Vám pošleme odkaz k zresetování Vašeho hesla.",
+        "EMAIL_INPUT": {
+            "TITLE": "Email",
+            "REQUIRED": "Musíte vyplnit toto pole!",
+            "PATTERN": "Zadejte validní email!"
+        },
+        "SEND": "Poslat!",
+        "SENDING": "Posíláme",
+        "LOGIN_HINT": "Nebo?",
+        "LOGIN_LINK": "Už jste si vzpomněl?",
+        "SUCCESS": "Úspěch! Na Váš email jsem Vám zaslali instrukce!",
+        "FAILED": "Něco se nepovedlo! Tento email neznáme!"
+    },
+    "RESET_PASS": {
+        "TITLE": "Změna hesla!",
+        "PASSWORD_INPUT": {
+            "TITLE": "Nové heslo",
+            "REQUIRED": "Musíte vyplnit toto pole!",
+            "MIN_LENGTH": "Minimální délka je 8 znaků!",
+            "PATTERN": "Heslo musí obsahovat pouze 1 malý znak, 1 velký znak a 1 číslo!"
+        },
+        "CORRECT_PASSWORD_INPUT": {
+            "TITLE": "Potvrzení hesla",
+            "REQUIRED": "Musíte vyplnit toto pole!",
+            "NOT_MATCHING": "Hesla nejsou stejná!"
+        },
+        "CHANGE": "Změnit!",
+        "CHANGING": "Měníme!",
+        "SUCCESS": "Vaše heslo bylo úspěšně změněno!",
+        "FAILED_EXPIRATION": "Je nám líto, ale již vypršela doba pro změnu hesla!",
+        "FAILED_SERVER": "Oops! Něco se u náš pokazilo!"
     }
 }

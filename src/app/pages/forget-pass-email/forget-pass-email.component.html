@@ -1,0 +1,57 @@
+<main
+  class="container d-flex flex-column justify-content-center align-items-center min-vh-100"
+>
+  <div class="row rounded-4 bg-white shadow purple">
+    <div class="col-12">
+      <div class="row">
+        <div class="d-flex">
+          <form [formGroup]="forgetForm" class="d-flex flex-column w-100 p-3">
+            
+            <h1 class="border-bottom mb-3 mb-lg-0 font-monospace">{{"FORGET_PASS.TITLE" | translate}}</h1>
+
+            <div class="lead fs-6 pt-3 text-center">{{"FORGET_PASS.HINT" | translate}}</div>       
+
+            <mat-form-field class="w-100 py-1 mt-3" appearance="outline">
+              <mat-label>{{"FORGET_PASS.EMAIL_INPUT.TITLE" | translate}}</mat-label>
+              <input matInput formControlName="email" required />
+
+              <mat-error class="fs-6 text-danger pt-1">
+                <small *ngIf="forgetFormControl.email.errors?.['required']">{{"FORGET_PASS.EMAIL_INPUT.REQUIRED" | translate}}</small>
+                <small *ngIf="forgetFormControl.email.errors?.['pattern']">{{"FORGET_PASS.EMAIL_INPUT.PATTERN" | translate}}</small>
+              </mat-error>
+            </mat-form-field>
+
+            <div class="d-flex flex-column w-100 mt-2">
+              <button
+                class="btn btn-warning fs-6 shadow"
+                type="button"
+                (click)="onSubmit()"
+                [disabled]="isLoading || isResetSuccess"
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  aria-hidden="true"
+                  *ngIf="isLoading"
+                ></span>
+                <span role="status"> {{ isLoading ? ("FORGET_PASS.SENDING" | translate) : ("FORGET_PASS.SEND"  | translate)}}</span>
+              </button>
+
+              <small class="align-self-center mt-2 fw-light">
+                {{"FORGET_PASS.LOGIN_HINT" | translate}} <a href="/login" class="text-decoration-none">{{"FORGET_PASS.LOGIN_LINK" | translate}}</a>
+              </small>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <small
+          [ngClass]="{ 'opacity-0': !message, 'text-success' : isResetSuccess,'text-danger' : isResetFailed}"
+          class="pe-none text-center fs-6 bg-opacity-10 py-1 fw-bold mt-3 mt-lg-0"
+        >
+          {{ message || "MESSAGE"}}
+        </small>
+      </div>
+    </div>
+  </div>
+</main>
+

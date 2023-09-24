@@ -21,6 +21,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { EmptyLayoutComponent } from './layouts/empty.layout';
 import { NavbarLayoutComponent } from './layouts/navbar.layout';
+import { ForgetPassEmailComponent } from './pages/forget-pass-email/forget-pass-email.component';
+import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -34,7 +36,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     NavbarComponent,
     EmptyLayoutComponent,
-    NavbarLayoutComponent
+    NavbarLayoutComponent,
+    ForgetPassEmailComponent,
+    ResetPassComponent
   ],
   imports: [
     BrowserModule,
