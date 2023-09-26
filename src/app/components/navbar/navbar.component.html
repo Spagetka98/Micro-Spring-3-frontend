@@ -15,7 +15,7 @@
             <a class="nav-link" href="#">Link</a>
           </li>     
         </ul>
-        <button class="btn btn-danger" type="submit">Odhlásit</button>
+        <button class="btn btn-danger" (click)="logout()" [disabled]="isLoading" type="submit">Odhlásit</button>
       </div>
     </div>
   </nav>
