@@ -105,5 +105,13 @@
         "SUCCESS": "Vaše heslo bylo úspěšně změněno!",
         "FAILED_EXPIRATION": "Je nám líto, ale již vypršela doba pro změnu hesla!",
         "FAILED_SERVER": "Oops! Něco se u náš pokazilo!"
+    },
+    "CONFIRMATION_EMAIL": {
+        "TITLE": "Probíhá ověřování Vašeho emailu!",
+        "SUBTITLE": "Dejte nám chviličku!",
+        "LOGIN_LINK": "Pojďte se tedy už přihlásit!",
+        "SUCCESS": "Váš email byl úspešně ověřen!",
+        "FAILED_EXPIRATION": "Je nám líto, ale již vypršela doba pro ověření emailu a učet již byl nejspíše smazán!",
+        "FAILED_SERVER": "Oops! Něco se u nás pokazilo!"
     }
 }

@@ -1,22 +1,29 @@
 //The basic api path
 const BASE_API = '/api';
 
+//The service name
+const AUTH_SERVICE = '/auth';
+const NEWS_SERVICE = '/news';
+
+//Version
+const VERSION_V1 = '/v1';
+
 //Type of path -> public -> Does not require a logged in user
 const PUBLIC = '/public';
-const SECURED = '/secured';
 
 //Controller path
-const AUTH = '/auth';
-const TOKEN = '/token';
-const USER = "/user";
-const PASSWORD = "/password";
+const USER = '/user';
+const REFRESH = '/refresh';
+const PASSWORD = '/password';
+const EMAIL = '/email';
 
-export const LoginApi = BASE_API + PUBLIC + AUTH + '/login';
-export const RegisterApi = BASE_API + PUBLIC + AUTH + '/register';
+export const API_POST_LOGIN = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + USER + '/login';
+export const API_POST_REGISTRATION = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + USER +'/registration';
+export const API_GET_LOGOUT = BASE_API + AUTH_SERVICE + VERSION_V1 + USER + '/logout';
 
-export const LogoutApi = BASE_API + SECURED + USER + '/logout';
+export const API_GET_REFRESH_JWT = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + REFRESH + '/jwt';
 
-export const RefreshJWTApi = BASE_API + PUBLIC + TOKEN + '/refreshJWT';
+export const API_POST_EMAIL_FORGOT = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + PASSWORD + '/forgot';
+export const API_POST_EMAIL_TOKEN_RESET = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + PASSWORD + '/reset-token';
 
-export const SendRefreshEmailApi = BASE_API + PUBLIC + PASSWORD + '/sendResetEmail';
-export const ResetEmailApi = BASE_API + PUBLIC + PASSWORD + '/resetPasswordByToken';
+export const API_GET_EMAIL_CONFIRMATION = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + EMAIL + '/confirmation';

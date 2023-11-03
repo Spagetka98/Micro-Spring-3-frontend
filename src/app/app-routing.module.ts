@@ -8,6 +8,7 @@ import { NavbarLayoutComponent } from './layouts/navbar.layout';
 import { AuthGuard } from './services/auth/authguard.service';
 import { ForgetPassEmailComponent } from './pages/forget-pass-email/forget-pass-email.component';
 import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
+import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
 
 const routes: Routes = [
   {
@@ -28,23 +29,28 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent
-      },
-      {
-        path: 'forgetPassword',
-        component: ForgetPassEmailComponent
-      },
-      {
-        path: 'resetPassword/:token',
-        component: ResetPassComponent
-      },
-      {
-        path: 'resetPassword',
-        component: ResetPassComponent
-      },
+      },   
       {
         path: 'registration',
         component: RegistrationComponent
       },
+      {
+        path: 'email-verification/:token',
+        component: EmailVerificationComponent
+      },
+      {
+        path: 'password',
+        children: [
+          {
+            path: 'forgot',
+            component: ForgetPassEmailComponent
+          },
+          {
+            path: 'reset/:token',
+            component: ResetPassComponent
+          },
+        ]
+      }
     ]
   },
   { path: '**', redirectTo: '' }

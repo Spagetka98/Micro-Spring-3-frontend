@@ -1,0 +1,27 @@
+<main
+  class="container d-flex flex-column justify-content-center align-items-center min-vh-100"
+>
+  <div class="row rounded-4 bg-white shadow purple">
+    <div *ngIf="!(isConfirmationFailed || isConfirmationSuccess)" class="col-12 p-2">
+      <div class="row text-center">
+        <p class="h2 font-monospace">{{"CONFIRMATION_EMAIL.TITLE" | translate}}</p>
+        <p class="h6 lead">{{"CONFIRMATION_EMAIL.SUBTITLE" | translate}}</p>
+      </div>
+      <div class="row my-3">
+        <div class="d-flex justify-content-center">
+          <div
+            class="spinner-border text-warning"
+            style="width: 8vw; height: 8vw"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isConfirmationFailed || isConfirmationSuccess" class="col-12 p-4">
+        <p class="pe-none text-center h2 pt-2" [ngClass]="{'text-success' : isConfirmationSuccess,'text-danger' : isConfirmationFailed}">{{message}}</p>
+        <small class="d-flex justify-content-center"><a routerLink="/login" *ngIf="isConfirmationSuccess" class="text-decoration-none lead text-dark">{{"CONFIRMATION_EMAIL.LOGIN_LINK" | translate}}</a></small>
+      </div>
+  </div>
+</main>

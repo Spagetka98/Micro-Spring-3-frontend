@@ -35,8 +35,8 @@
 
                   <mat-error class="fs-6 text-danger">
                     <small *ngIf="userDetailsFormControl.lastName.errors?.['required']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.REQUIRED" | translate}}</small>
-                    <small *ngIf="userDetailsFormControl.lastName.errors?.['minlength']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.REQUIRED" | translate}}</small>
-                    <small *ngIf="!userDetailsFormControl.lastName.errors?.['minlength'] && userDetailsFormControl.lastName.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.REQUIRED" | translate}}</small>
+                    <small *ngIf="userDetailsFormControl.lastName.errors?.['minlength']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.MIN_LENGTH" | translate}}</small>
+                    <small *ngIf="!userDetailsFormControl.lastName.errors?.['minlength'] && userDetailsFormControl.lastName.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.PATTERN" | translate}}</small>
                   </mat-error>
                 </mat-form-field>
 

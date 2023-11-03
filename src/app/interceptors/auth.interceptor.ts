@@ -12,7 +12,7 @@ import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { StorageService } from '../services/storage/storage.service';
 import { RefreshService } from '../services/api/refresh.service';
 import { Router } from '@angular/router';
-import { LoginApi } from '../services/api/api.path';
+import { API_POST_LOGIN } from '../services/api/api.path';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +34,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       catchError((error) => {
-        if (error instanceof HttpErrorResponse && error.status === 401 && req.url !== LoginApi) return this.handleExpiration(req, next);
+        if (error instanceof HttpErrorResponse && error.status === 401 && req.url !== API_POST_LOGIN) return this.handleExpiration(req, next);
         else return throwError(() => error);
       })
     );

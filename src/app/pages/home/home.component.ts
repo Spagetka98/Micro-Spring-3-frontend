@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/services/api/auth.service';
+import { AuthService } from 'src/app/services/api/user.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({

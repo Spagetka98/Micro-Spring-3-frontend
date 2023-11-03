@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IRegistration } from 'src/app/models/registration.model';
-import { AuthService } from 'src/app/services/api/auth.service';
+import { AuthService } from 'src/app/services/api/user.service';
 import Validation from './validator/matchpassword.validator';
 import { TranslateService } from '@ngx-translate/core';
 import { EMAIL_REGEX, NAME_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from 'src/app/services/regex/regex.service';
