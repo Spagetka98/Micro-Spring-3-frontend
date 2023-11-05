@@ -8,15 +8,15 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { HomeComponent } from './pages/home/home.component';
 
-import {HttpClientModule, HttpClient} from '@angular/common/http';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 import { httpInterceptorProviders } from './interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatIconModule} from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { EmptyLayoutComponent } from './layouts/empty.layout';
@@ -24,6 +24,10 @@ import { NavbarLayoutComponent } from './layouts/navbar.layout';
 import { ForgetPassEmailComponent } from './pages/forget-pass-email/forget-pass-email.component';
 import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
 import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
+import { NewsHeaderComponent } from './pages/home/components/news-header/news-header.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -40,12 +44,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     NavbarLayoutComponent,
     ForgetPassEmailComponent,
     ResetPassComponent,
-    EmailVerificationComponent
+    EmailVerificationComponent,
+    NewsHeaderComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MatMenuModule,
+    MatButtonModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

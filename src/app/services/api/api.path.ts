@@ -16,6 +16,7 @@ const USER = '/user';
 const REFRESH = '/refresh';
 const PASSWORD = '/password';
 const EMAIL = '/email';
+const NEWS = '/news';
 
 export const API_POST_LOGIN = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + USER + '/login';
 export const API_POST_REGISTRATION = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + USER +'/registration';
@@ -27,3 +28,4 @@ export const API_POST_EMAIL_FORGOT = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBL
 export const API_POST_EMAIL_TOKEN_RESET = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + PASSWORD + '/reset-token';
 
 export const API_GET_EMAIL_CONFIRMATION = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + EMAIL + '/confirmation';
+export const API_GET_NEWS = BASE_API + NEWS_SERVICE + VERSION_V1 +  NEWS

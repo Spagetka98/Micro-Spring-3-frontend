@@ -1,6 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/api/user.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
@@ -10,8 +9,8 @@ import { StorageService } from 'src/app/services/storage/storage.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  public itemsShowCount = 0;
 
-  eventSub?: Subscription;
 
   constructor(
     private http: HttpClient,
@@ -22,17 +21,5 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    fetch("/api/test/endpoint")
-      .then(data => console.log(data));
-
-      this.http.get("/api/test/endpoint", { headers: new HttpHeaders({ 'Content-Type': 'application/json' })})
-      .subscribe({
-        next: (data) => {
-          console.log(data);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      })
   }
 }
