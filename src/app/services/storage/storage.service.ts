@@ -17,7 +17,6 @@ export class StorageService {
     window.sessionStorage.removeItem(this.USER_KEY);
     window.sessionStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
-
   
   public getUserFromStorage(): IUser | null {
     const user = window.sessionStorage.getItem(this.USER_KEY);

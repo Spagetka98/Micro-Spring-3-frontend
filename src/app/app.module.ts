@@ -24,10 +24,12 @@ import { NavbarLayoutComponent } from './layouts/navbar.layout';
 import { ForgetPassEmailComponent } from './pages/forget-pass-email/forget-pass-email.component';
 import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
 import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
-import { NewsHeaderComponent } from './pages/home/components/news-header/news-header.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NewsComponent } from './pages/home/components/news/news.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -45,8 +47,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ForgetPassEmailComponent,
     ResetPassComponent,
     EmailVerificationComponent,
-    NewsHeaderComponent,
-    PaginationComponent
+    PaginationComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,10 +57,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatMenuModule,
     MatButtonModule,
     HttpClientModule,
+    MatCardModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatFormFieldModule,
+    MatProgressBarModule,
     MatStepperModule,
     MatIconModule,
     TranslateModule.forRoot({

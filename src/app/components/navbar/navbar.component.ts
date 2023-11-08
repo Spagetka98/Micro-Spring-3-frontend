@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/api/user.service';
+import { UserService } from 'src/app/services/api/user.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class NavbarComponent {
   isLoading: boolean = false;
 
   constructor(
-    private _auth: AuthService,
+    private _userService: UserService,
     private _storage: StorageService,
     private _router: Router){}
   
@@ -20,7 +20,7 @@ export class NavbarComponent {
     
     this.isLoading = true;
     
-    this._auth.logout()
+    this._userService.logout()
     .subscribe()
     .add(() => this.handleFinish());
   }

@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IRegistration } from 'src/app/models/registration.model';
-import { AuthService } from 'src/app/services/api/user.service';
+import { UserService } from 'src/app/services/api/user.service';
 import Validation from './validator/matchpassword.validator';
 import { TranslateService } from '@ngx-translate/core';
 import { EMAIL_REGEX, NAME_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from 'src/app/services/regex/regex.service';
@@ -48,7 +48,7 @@ export class RegistrationComponent {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _authService: AuthService,
+    private _userService: UserService,
     private _translate: TranslateService
   ) {}
   
@@ -74,7 +74,7 @@ export class RegistrationComponent {
       password: this.accountDetailsForm.value.password
     };
 
-    this._authService
+    this._userService
       .register(registrationRequest)
       .subscribe({
         next: () => this.displaySuccessMessage(),

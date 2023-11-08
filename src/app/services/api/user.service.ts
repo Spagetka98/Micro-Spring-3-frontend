@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { API_POST_LOGIN, API_POST_REGISTRATION, API_GET_LOGOUT } from './api.path';
+import { API_POST_LOGIN, API_POST_REGISTRATION, API_GET_LOGOUT, API_GET_USER_DETAILS } from './api.path';
 import { IUser } from 'src/app/models/user.model';
 import { IRegistration } from 'src/app/models/registration.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class UserService {
   constructor(private _http: HttpClient) {}
 
   public login(username: string, password: string): Observable<IUser> {
@@ -22,5 +22,12 @@ export class AuthService {
 
   public logout(): Observable<{}> {
     return this._http.get(API_GET_LOGOUT);
+  }
+
+  public getUserDetails(userId: string): Observable<IUser> {
+    let params = new HttpParams();
+    params = params.append("id",userId);
+
+    return this._http.get<IUser>(API_GET_USER_DETAILS,{params: params})
   }
 }

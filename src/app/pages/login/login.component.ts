@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../services/api/user.service';
+import { UserService } from '../../services/api/user.service';
 import { StorageService } from '../../services/storage/storage.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -24,7 +24,7 @@ export class LoginComponent {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _authService: AuthService,
+    private _userService: UserService,
     private _storageService: StorageService,
     private _routerService: Router,
     private _translate: TranslateService,
@@ -48,7 +48,7 @@ export class LoginComponent {
     this.isLoading = true;
     this.errorMessage = undefined;
     
-    this._authService
+    this._userService
       .login(this.loginForm.value.username!, this.loginForm.value.password!)
       .subscribe({
         next: (data: IUser) => this.handleSuccess(data),

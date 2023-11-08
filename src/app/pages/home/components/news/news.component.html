@@ -1,0 +1,21 @@
+<mat-card class="rounded-4 mt-4 overflow-hidden">
+    <mat-card-header>
+            <div *ngIf="!isLoading" mat-card-avatar class="overflow-hidden">
+                <img src="http://localhost:9000{{news.uri}}"alt="mat-card-avatar">
+            </div>
+            <mat-card-title *ngIf="!isLoading">{{username}}</mat-card-title>
+            <mat-card-subtitle *ngIf="!isLoading">{{role | translate}}</mat-card-subtitle>
+        <mat-progress-bar class="mb-3" *ngIf="isLoading" mode="buffer"></mat-progress-bar>
+    </mat-card-header>
+    <img mat-card-image src="http://localhost:9000{{news.uri}}" class="img-fluid" alt="thumbnail">
+    <mat-card-content>
+      <h2>{{news.title}}</h2>
+    </mat-card-content>
+    <mat-card-actions class="d-flex justify-content-between">
+        <div class="d-flex">
+            <button mat-button>LIKE</button>
+            <button mat-button>DISLIKE</button>
+        </div>
+        <button mat-button>Komentáře <i class="bi bi-arrow-right"></i></button>
+    </mat-card-actions>
+</mat-card>

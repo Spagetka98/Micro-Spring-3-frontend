@@ -113,5 +113,12 @@
         "SUCCESS": "Váš email byl úspešně ověřen!",
         "FAILED_EXPIRATION": "Je nám líto, ale již vypršela doba pro ověření emailu a učet již byl nejspíše smazán!",
         "FAILED_SERVER": "Oops! Něco se u nás pokazilo!"
-    }
+    },
+    "PAGINATION": {
+        "SHOW": "Zobrazování:",
+        "FROM": "z"
+    },
+    "ROLE_USER": "Uživatel",
+    "ROLE_EDITOR": "Editor",
+    "ROLE_ADMIN": "Admin"
 }

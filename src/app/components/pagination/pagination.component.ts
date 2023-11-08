@@ -7,11 +7,17 @@ import { IPage } from 'src/app/models/page.model';
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent {
-  @Input() public currentPage: number = 0;
+  private _currentPage: number = 0;
   @Input() public totalPages: number = 0;
   @Input() public pageSizeOptions: number[] = [];
   @Input() public itemsShowCount: number = 0;
   @Input() public isLoading: boolean = false;
+  @Input() set currentPage(currentPage: number) {
+    this._currentPage = currentPage + 1;
+  }
+  get currentPage(): number {
+    return this._currentPage;
+  }
 
   @Output() public onPageChange: EventEmitter<IPage> = new EventEmitter<IPage>();
  
@@ -19,7 +25,7 @@ export class PaginationComponent {
     if(this.itemsShowCount == count) return;
 
     this.itemsShowCount = count;
-    this.currentPage = 0;
+    this._currentPage = 1;
 
     this.emitPageChange();
   }
@@ -29,18 +35,18 @@ export class PaginationComponent {
     let newPage: number = this.currentPage + page;
 
     if(newPage > this.totalPages) 
-      this.currentPage = this.totalPages;
+      this._currentPage = this.totalPages;
     else if(newPage < 1)
-      this.currentPage = 0;
+      this._currentPage = 1;
     else 
-      this.currentPage = newPage;
+      this._currentPage = newPage;
 
     if(currentPageValue != this.currentPage) this.emitPageChange();
   }
 
-  private emitPageChange(){
+  public emitPageChange(){
     this.onPageChange.emit({
-      currentPage: this.currentPage,
+      currentPage: this.currentPage - 1,
       itemsPerPage: this.itemsShowCount
     })
   }
