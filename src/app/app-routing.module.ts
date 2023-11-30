@@ -5,10 +5,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { EmptyLayoutComponent } from './layouts/empty.layout';
 import { NavbarLayoutComponent } from './layouts/navbar.layout';
-import { AuthGuard } from './services/auth/authguard.service';
 import { ForgetPassEmailComponent } from './pages/forget-pass-email/forget-pass-email.component';
 import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
 import { EmailVerificationComponent } from './pages/email-verification/email-verification.component';
+import { AuthGuard } from './services/auth/auth.guard';
 
 const routes: Routes = [
   {

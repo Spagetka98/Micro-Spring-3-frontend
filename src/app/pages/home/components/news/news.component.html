@@ -1,21 +1,36 @@
 <mat-card class="rounded-4 mt-4 overflow-hidden">
     <mat-card-header>
-            <div *ngIf="!isLoading" mat-card-avatar class="overflow-hidden">
-                <img src="http://localhost:9000{{news.uri}}"alt="mat-card-avatar">
-            </div>
-            <mat-card-title *ngIf="!isLoading">{{username}}</mat-card-title>
-            <mat-card-subtitle *ngIf="!isLoading">{{role | translate}}</mat-card-subtitle>
+        <div *ngIf="!isLoading" mat-card-avatar class="overflow-hidden">
+            <img src="http://localhost:9000{{news.uri}}"alt="mat-card-avatar">
+        </div>
+        <mat-card-title *ngIf="!isLoading">{{username}}</mat-card-title>
+        <mat-card-subtitle *ngIf="!isLoading">{{role | translate}}</mat-card-subtitle>         
         <mat-progress-bar class="mb-3" *ngIf="isLoading" mode="buffer"></mat-progress-bar>
     </mat-card-header>
-    <img mat-card-image src="http://localhost:9000{{news.uri}}" class="img-fluid" alt="thumbnail">
-    <mat-card-content>
+    <img mat-card-image src="http://localhost:9000{{news.uri}}" class="img-fluid shadow" alt="thumbnail">
+    <mat-card-content class="d-flex justify-content-center justify-content-md-start mt-2">
       <h2>{{news.title}}</h2>
     </mat-card-content>
-    <mat-card-actions class="d-flex justify-content-between">
-        <div class="d-flex">
-            <button mat-button>LIKE</button>
-            <button mat-button>DISLIKE</button>
+    <mat-card-actions class="row">
+        <div class="col-md-6 d-flex justify-content-md-start justify-content-center">
+            <button (click)="onLikeAction(news.newsId)" mat-button class="me-3" type="button" [disabled]="isLoading" [ngClass]="{'text-success': news.isLikedByUser}">
+                <i class="bi bi-emoji-smile"></i> {{"NEWS.ADD_LIKE" | translate}}
+                <span *ngIf="isLoading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            </button>
+            <button (click)="onDislikeAction(news.newsId)" mat-button type="button" [disabled]="isLoading" [ngClass]="{'text-danger': news.isDislikedByUser}">
+                 <i class="bi bi-emoji-frown"></i> {{"NEWS.ADD_DISLIKE" | translate}}
+                <span *ngIf="isLoading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>      
+            </button>
         </div>
-        <button mat-button>Komentáře <i class="bi bi-arrow-right"></i></button>
+        <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
+            <button [disabled]="isLoading" mat-button>{{"NEWS.COMMENTS" | translate}} <i class="bi bi-arrow-right"></i></button>
+        </div>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="currentUserRole === Roles.ROLE_EDITOR || currentUserRole === Roles.ROLE_ADMIN" class="d-flex flex-column justify-content-center bg-secondary bg-opacity-10">
+        <div class="d-flex">
+            <button [disabled]="isLoading" (click)="updateNews(news.newsId)" mat-button><i class="bi bi-pencil-fill"></i> {{"NEWS.CHANGE" | translate}}</button>
+            <button [disabled]="isLoading" (click)="deleteNews(news.newsId)" mat-button><i class="bi bi-trash3-fill"></i> {{"NEWS.DELETE" | translate}}</button>
+        </div>
+        <mat-progress-bar *ngIf="isLoading" class="my-2" mode="buffer"></mat-progress-bar>
     </mat-card-actions>
 </mat-card>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../../models/user.model';
+import { Role } from 'src/app/components/enums/role.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,12 @@ export class StorageService {
     const user = window.sessionStorage.getItem(this.USER_KEY);
 
     return user ? JSON.parse(user) : null;
+  }
+
+  public getUserRole(): Role | null {
+    const user = this.getUserFromStorage();
+
+    return user ? user.role : null;
   }
 
   public isUserLoggedIn(): boolean {

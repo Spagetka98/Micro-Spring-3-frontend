@@ -11,6 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar'; 
 import { httpInterceptorProviders } from './interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
@@ -64,6 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatFormFieldModule,
     MatProgressBarModule,
     MatStepperModule,
+    MatSnackBarModule,
     MatIconModule,
     TranslateModule.forRoot({
       loader: {

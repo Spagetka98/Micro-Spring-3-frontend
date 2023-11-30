@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/api/user.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { Role } from '../enums/role.enum';
 
 @Component({
   selector: 'app-navbar',
@@ -9,15 +10,18 @@ import { StorageService } from 'src/app/services/storage/storage.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  isLoading: boolean = false;
+  public isLoading: boolean = false;
+  public role: Role = Role.ROLE_USER;
+  public Roles = Role;
 
   constructor(
     private _userService: UserService,
     private _storage: StorageService,
-    private _router: Router){}
+    private _router: Router) {
+      this.handleRole();
+    }
   
-  logout(): void {
-    
+  public logout(): void { 
     this.isLoading = true;
     
     this._userService.logout()
@@ -25,7 +29,16 @@ export class NavbarComponent {
     .add(() => this.handleFinish());
   }
 
-  private handleFinish(): void{
+  private handleRole(): void {
+    let role = this._storage.getUserRole();
+
+    if(role) 
+      this.role = role;
+    else 
+      this.handleFinish();
+  }
+
+  private handleFinish(): void {
     this.isLoading = false
 
     this._storage.cleanStorage()

@@ -6,4 +6,8 @@ export interface INews {
     userId: string,
     creationDate: Date,
     updateDate: Date
+    totalLikes: number,
+    totalDislikes: number,
+    isLikedByUser: boolean,
+    isDislikedByUser: boolean
 }

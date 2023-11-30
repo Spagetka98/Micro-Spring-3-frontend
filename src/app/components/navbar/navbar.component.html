@@ -1,17 +1,25 @@
 <nav class="navbar navbar-expand-md bg-light shadow">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">
+        <img src="https://www.svgrepo.com/show/530364/lemon.svg" alt="navbar-logo"  width="40" height="30"> 
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto ">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Novinky</a>
+          <li *ngIf="role === Roles.ROLE_USER" class="nav-item">
+            <a class="nav-link active" aria-current="page" href="home">Novinky</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>     
+          <li *ngIf="role !== Roles.ROLE_USER" class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="home" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Novinky
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="home">Zobrazit</a></li>
+              <li><a class="dropdown-item" href="news/create">Vytvořit</a></li>
+            </ul>
+          </li>       
         </ul>
         <button class="btn btn-danger" (click)="logout()" [disabled]="isLoading" type="submit">Odhlásit</button>
       </div>

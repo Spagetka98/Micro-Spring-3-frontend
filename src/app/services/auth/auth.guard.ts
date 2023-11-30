@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 export class AuthGuard {
   constructor(private _storage: StorageService, private _router: Router) {}
 
-  canActivate(): boolean {
+  public canActivate(): boolean {
     if (this._storage.isUserLoggedIn()) return true;
     else {
       this._router.navigate(['/login']);

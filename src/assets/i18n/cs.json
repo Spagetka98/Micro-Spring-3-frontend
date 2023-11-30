@@ -118,6 +118,18 @@
         "SHOW": "Zobrazování:",
         "FROM": "z"
     },
+    "SNACK_BAR": {
+        "NEWS_DELETE_SUCCESS": "Zpráva byla smazána!",
+        "NEWS_DELETE_FAILED": "Zprávu se nepodařilo smazat!",
+        "NEWS_LOAD_FAILED": "Oops! Něco se pokazilo!"
+    },
+    "NEWS": {
+        "ADD_LIKE": "To se mi líbí!",
+        "ADD_DISLIKE": "To se mi nelíbí!",
+        "CHANGE": "Upravit",
+        "DELETE": "Smazat",
+        "COMMENTS": "Komentáře"
+    },
     "ROLE_USER": "Uživatel",
     "ROLE_EDITOR": "Editor",
     "ROLE_ADMIN": "Admin"

@@ -10,7 +10,7 @@
     </div>
 
     <div *ngIf="news.length > 0" class="row mb-4">
-        <app-news [news]="data" *ngFor="let data of news"></app-news>
+        <app-news [news]="data" [currentUserRole]="currentUserRole" [isLoading]="isLoading" (onDelete)="deleteNews($event)" *ngFor="let data of news"></app-news>
     </div>
 
 </div>
