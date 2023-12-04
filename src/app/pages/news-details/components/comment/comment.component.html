@@ -1,0 +1,14 @@
+<mat-card class="bg-transparent mt-4">
+    <mat-card-header *ngIf="author">
+      <mat-card-title>{{author.username}}</mat-card-title>
+      <mat-card-subtitle>{{author.firstName}} {{author.lastName}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="py-3">
+      <p>{{comment.text}}</p>
+    </mat-card-content>
+    <mat-card-footer *ngIf="isLoading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+</mat-card>
+  
+  

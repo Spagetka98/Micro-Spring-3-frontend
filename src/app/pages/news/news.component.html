@@ -1,5 +1,4 @@
-<div class="container">
-
+<main class="container">
     <div class="bg-light rounded-4 mt-4 py-2 shadow lead fs-6 overflow-hidden">
         <div class="row">    
             <app-pagination (onPageChange)="onPageChange($event)" [currentPage]="currentPage" [totalPages]="totalPages" [pageSizeOptions]="pageSizeOptions" [itemsShowCount]="itemsPerPage" [isLoading]="isLoading"></app-pagination>   
@@ -10,7 +9,6 @@
     </div>
 
     <div *ngIf="news.length > 0" class="row mb-4">
-        <app-news [news]="data" [currentUserRole]="currentUserRole" [isLoading]="isLoading" (onDelete)="deleteNews($event)" *ngFor="let data of news"></app-news>
+        <app-news-window [news]="data" [currentUserRole]="currentUserRole" [isLoading]="isLoading" (onDelete)="deleteNews($event)" *ngFor="let data of news"></app-news-window>
     </div>
-
-</div>
+</main>

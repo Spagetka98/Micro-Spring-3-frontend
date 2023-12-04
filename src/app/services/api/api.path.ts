@@ -30,6 +30,7 @@ export const API_POST_EMAIL_TOKEN_RESET = BASE_API + AUTH_SERVICE + VERSION_V1 +
 export const API_GET_EMAIL_CONFIRMATION = BASE_API + AUTH_SERVICE + VERSION_V1 + PUBLIC + EMAIL + '/confirmation';
 
 export const API_GET_NEWS = BASE_API + NEWS_SERVICE + VERSION_V1 +  NEWS;
+export const API_GET_NEWS_IMG = BASE_API + NEWS_SERVICE + VERSION_V1 +  NEWS + '/img';
 export const API_DELETE_NEWS = BASE_API + NEWS_SERVICE + VERSION_V1 +  NEWS;
 export const API_PUT_NEWS_ADD_LIKE = {
     START: BASE_API + NEWS_SERVICE + VERSION_V1 + NEWS + '/',
@@ -46,4 +47,8 @@ export const API_PUT_NEWS_ADD_DISLIKE = {
 export const API_PUT_NEWS_REMOVE_DISLIKE = {
     START: BASE_API + NEWS_SERVICE + VERSION_V1 + NEWS + '/',
     END: '/remove-dislike'
+} 
+export const API_GET_NEWS_COMMENTS = {
+    START: BASE_API + NEWS_SERVICE + VERSION_V1 + NEWS + '/',
+    END: '/comment'
 } 

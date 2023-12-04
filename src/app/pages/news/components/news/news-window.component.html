@@ -1,13 +1,13 @@
 <mat-card class="rounded-4 mt-4 overflow-hidden">
     <mat-card-header>
         <div *ngIf="!isLoading" mat-card-avatar class="overflow-hidden">
-            <img src="http://localhost:9000{{news.uri}}"alt="mat-card-avatar">
+            <img src="{{IMG_PATH}}/{{news.newsId}}" alt="mat-card-avatar">
         </div>
         <mat-card-title *ngIf="!isLoading">{{username}}</mat-card-title>
         <mat-card-subtitle *ngIf="!isLoading">{{role | translate}}</mat-card-subtitle>         
         <mat-progress-bar class="mb-3" *ngIf="isLoading" mode="buffer"></mat-progress-bar>
     </mat-card-header>
-    <img mat-card-image src="http://localhost:9000{{news.uri}}" class="img-fluid shadow" alt="thumbnail">
+    <img mat-card-image style="max-height: 90vh;" src="{{IMG_PATH}}/{{news.newsId}}" class="img-fluid shadow" alt="thumbnail">
     <mat-card-content class="d-flex justify-content-center justify-content-md-start mt-2">
       <h2>{{news.title}}</h2>
     </mat-card-content>
@@ -23,7 +23,7 @@
             </button>
         </div>
         <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
-            <button [disabled]="isLoading" mat-button>{{"NEWS.COMMENTS" | translate}} <i class="bi bi-arrow-right"></i></button>
+            <button [routerLink]="['/news', 'details', news.newsId]" [disabled]="isLoading" mat-button>{{"NEWS.MORE" | translate}} <i class="bi bi-arrow-right"></i></button>
         </div>
     </mat-card-actions>
     <mat-card-actions *ngIf="currentUserRole === Roles.ROLE_EDITOR || currentUserRole === Roles.ROLE_ADMIN" class="d-flex flex-column justify-content-center bg-secondary bg-opacity-10">
@@ -34,3 +34,4 @@
         <mat-progress-bar *ngIf="isLoading" class="my-2" mode="buffer"></mat-progress-bar>
     </mat-card-actions>
 </mat-card>
+

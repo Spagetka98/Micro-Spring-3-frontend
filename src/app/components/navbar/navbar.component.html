@@ -9,14 +9,14 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto ">
           <li *ngIf="role === Roles.ROLE_USER" class="nav-item">
-            <a class="nav-link active" aria-current="page" href="home">Novinky</a>
+            <a class="nav-link active" aria-current="page" href="news">Novinky</a>
           </li>
           <li *ngIf="role !== Roles.ROLE_USER" class="nav-item dropdown">
-            <a class="nav-link active dropdown-toggle" href="home" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link active dropdown-toggle" href="news" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Novinky
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="home">Zobrazit</a></li>
+              <li><a class="dropdown-item" href="news">Zobrazit</a></li>
               <li><a class="dropdown-item" href="news/create">Vytvořit</a></li>
             </ul>
           </li>       

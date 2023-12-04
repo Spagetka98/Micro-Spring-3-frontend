@@ -3,15 +3,16 @@ import { OnInit , Component, Input, Output, EventEmitter } from '@angular/core';
 import { Role } from 'src/app/components/enums/role.enum';
 import { INews } from 'src/app/models/news.model';
 import { IUser } from 'src/app/models/user.model';
+import { API_GET_NEWS_IMG } from 'src/app/services/api/api.path';
 import { NewsService } from 'src/app/services/api/news.service';
 import { UserService } from 'src/app/services/api/user.service';
 
 @Component({
-  selector: 'app-news',
-  templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css']
+  selector: 'app-news-window',
+  templateUrl: './news-window.component.html',
+  styleUrls: ['./news-window.component.css']
 })
-export class NewsComponent implements OnInit {
+export class NewsWindowComponent implements OnInit {
   @Input({ required: true }) news!: INews; 
   @Input() isLoading: boolean = false;
   @Input() currentUserRole: Role = Role.ROLE_USER;
@@ -22,7 +23,8 @@ export class NewsComponent implements OnInit {
   public username: string = "";
   public role: string = "";
   public Roles = Role
-
+  public IMG_PATH: string = API_GET_NEWS_IMG;
+  
   constructor(
     private _userService: UserService,
     private _newsService: NewsService){

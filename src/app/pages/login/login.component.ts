@@ -61,7 +61,7 @@ export class LoginComponent {
     this.isErrorReceived = false;
 
     this._storageService.saveUserToStorage(user);
-    this._routerService.navigate(['home']);
+    this._routerService.navigate(['news']);
   }
 
   private handleError(error: HttpErrorResponse): void {

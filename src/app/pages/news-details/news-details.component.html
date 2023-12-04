@@ -1,0 +1,22 @@
+<main class="bg-light">
+    <article *ngIf="news">
+        <img style="min-height: 50vh; max-height: 75vh;" src="{{IMG_PATH}}/{{news.newsId}}" class="img-fluid shadow w-100" alt="thumbnail">
+        <div class="mx-3">
+            <hgroup class="mt-3">
+                <h1 class="mb-0 fw-semibold">{{news.title}}</h1>
+                <h4 class="fw-light mb-1">
+                    Napsáno <ng-container *ngIf="author"> uživatelem {{author.username}}</ng-container> dne: {{ news.creationDate | date:"dd.MM.yyyy" }}
+                </h4>
+            </hgroup>
+            <p class="fw-light fs-5 text-wrap border-top border-bottom border-dark py-2 text-break mb-0">{{news.text}}</p>
+            <section class="mt-1">
+                <div class="d-flex justify-content-center align-items-center">
+                    <h2 class="fw-semibold mb-1">Komentáře <span class="badge text-bg-warning">{{news.totalComments}}</span></h2>
+                </div>
+                <ng-container *ngIf="news.totalComments > 0">
+                   <app-comments-show [newsId]="news.newsId" [isLoading]="isLoading"></app-comments-show>
+                </ng-container>
+            </section>
+        </div>
+    </article>
+</main>

@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
-import { HomeComponent } from './pages/home/home.component';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -30,7 +29,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { NewsComponent } from './pages/home/components/news/news.component';
+
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { NewsComponent } from './pages/news/news.component';
+import { NewsWindowComponent } from './pages/news/components/news/news-window.component';
+import { NewsDetailsComponent } from './pages/news-details/news-details.component';
+import { CommentsShowComponent } from './pages/news-details/components/comments-show/comments-show.component';
+import { CommentComponent } from './pages/news-details/components/comment/comment.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -41,7 +46,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    HomeComponent,
+    NewsComponent,
+    NewsWindowComponent,
     NavbarComponent,
     EmptyLayoutComponent,
     NavbarLayoutComponent,
@@ -49,7 +55,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResetPassComponent,
     EmailVerificationComponent,
     PaginationComponent,
-    NewsComponent
+    NewsDetailsComponent,
+    CommentsShowComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatStepperModule,
     MatSnackBarModule,
     MatIconModule,
+    MatSidenavModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

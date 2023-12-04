@@ -128,7 +128,7 @@
         "ADD_DISLIKE": "To se mi nelíbí!",
         "CHANGE": "Upravit",
         "DELETE": "Smazat",
-        "COMMENTS": "Komentáře"
+        "MORE": "Více"
     },
     "ROLE_USER": "Uživatel",
     "ROLE_EDITOR": "Editor",

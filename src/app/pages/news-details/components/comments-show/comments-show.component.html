@@ -1,0 +1,5 @@
+<app-pagination  (onPageChange)="onPageChange($event)" [currentPage]="currentPage" [totalPages]="totalPages" [pageSizeOptions]="pageSizeOptions" [itemsShowCount]="itemsPerPage" [isLoading]="isLoading"></app-pagination> 
+
+<div class="border-top border-dark">
+    <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
+</div>

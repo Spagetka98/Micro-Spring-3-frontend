@@ -9,11 +9,11 @@ import { NewsService } from 'src/app/services/api/news.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-news',
+  templateUrl: './news.component.html',
+  styleUrls: ['./news.component.css']
 })
-export class HomeComponent implements OnInit {
+export class NewsComponent implements OnInit {
   public currentPage: number = 0;
   public itemsPerPage: number = 5;
   public pageSizeOptions: number[] = [5,10,15,20]

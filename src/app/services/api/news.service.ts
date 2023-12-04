@@ -3,12 +3,17 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { API_DELETE_NEWS, API_GET_NEWS, API_PUT_NEWS_ADD_DISLIKE, API_PUT_NEWS_ADD_LIKE, API_PUT_NEWS_REMOVE_DISLIKE, API_PUT_NEWS_REMOVE_LIKE } from "./api.path";
 import { IPageResponse } from "src/app/models/page-response.model";
+import { INews } from "src/app/models/news.model";
 
 @Injectable({
     providedIn: 'root',
 })
 export class NewsService {
     constructor(private _http: HttpClient) {}
+
+    public getNewsById(id: number): Observable<INews> {
+        return this._http.get<INews>(API_GET_NEWS + `/${id}`);
+    }
 
     public getNews(currentPage: number, sizeOfPage: number): Observable<IPageResponse> {
         let params = new HttpParams();
