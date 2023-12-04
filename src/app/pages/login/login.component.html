@@ -1,86 +1,58 @@
-<main
-  class="container d-flex flex-column justify-content-center align-items-center min-vh-100"
->
-  <div class="row rounded-4 bg-white shadow w-lg-75 overflow-hidden purple">
-    <div class="col-12">
-      <div class="row">
-        <div class="col-lg-6">
-          <img
-            src="https://img.freepik.com/free-vector/hand-drawn-phoenix_23-2148486871.jpg"
-            alt="login_pic"
-            class="img-fluid pe-none"
-          />
-        </div>
-        <div class="col-lg-6 d-flex">
-          <form [formGroup]="loginForm" class="d-flex flex-column w-100 justify-content-evenly">
-            <h1 class="border-bottom mb-3 mb-lg-0 font-monospace">{{"LOGIN.TITLE" | translate}}</h1>
-
-            <mat-form-field class="w-100 py-1 mt-4" appearance="outline">
-              <mat-label>{{"LOGIN.USERNAME_TITLE" | translate}}</mat-label>
-              <input matInput formControlName="username" required />
-
-              <mat-error class="fs-6 text-danger pt-1">
-                <small *ngIf="loginFormControl.username.errors?.['required']">{{"LOGIN.USERNAME_REQUIRED" | translate}}</small>
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="w-100 py-1" appearance="outline">
-              <mat-label>{{"LOGIN.PASSWORD_TITLE" | translate}}</mat-label>
-              <input
-                matInput
-                [type]="isPasswordHidden ? 'password' : 'text'"
-                formControlName="password"
-                required
-              />
-              <button
-                class="hide"
-                mat-icon-button
-                matSuffix
-                (click)="isPasswordHidden = !isPasswordHidden"
-                [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="isPasswordHidden"
-              >
-                <mat-icon>{{isPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
-              </button>
-
-              <mat-error class="fs-6 text-danger">
-                <small *ngIf="loginFormControl.password.errors?.['required']">{{"LOGIN.PASSWORD_REQUIRED" | translate}}</small>
-              </mat-error>
-            </mat-form-field>
-
-            <div class="d-flex flex-column w-100">
-              <button
-                class="btn btn-warning fs-6 shadow"
-                type="button"
-                (click)="onSubmit()"
-                [disabled]="isLoading"
-              >
-                <span
-                  class="spinner-border spinner-border-sm"
-                  aria-hidden="true"
-                  *ngIf="isLoading"
-                ></span>
-                <span role="status"> {{ isLoading ? ("LOGIN.LOGGING_IN" | translate) : ("LOGIN.LOG_IN"  | translate)}}</span>
-              </button>
-
-              <small class="align-self-center mt-3 fw-light">
-                {{"LOGIN.ACCOUNT.MISSING" | translate}} <a routerLink="/registration" class="text-decoration-none">{{"LOGIN.ACCOUNT.CREATE_LINK" | translate}}</a>
-              </small>
-              <small class="align-self-center mt-1 fw-light">
-                {{"LOGIN.PASSWORD.OR" | translate}} <a href="/password/forgot" class="text-decoration-none">{{"LOGIN.PASSWORD.RESET_LINK" | translate}}</a>
-              </small>
-            </div>
-          </form>
-        </div>
+<main class="d-flex flex-column justify-content-center align-items-center min-vh-100">
+  <div class="container box rounded-4 bg-white shadow overflow-hidden purple">
+    <div class="row">
+      <div class="col-lg-6">
+            <img
+              src="https://img.freepik.com/free-vector/hand-drawn-phoenix_23-2148486871.jpg"
+              alt="login_pic"
+              class="img-fluid pe-none"
+            />
       </div>
-      <div class="row">
-        <div
-          [ngClass]="{ 'opacity-0': !isErrorReceived || !errorMessage }"
-          class="text-danger pe-none text-center fs-6 text-bg-danger bg-opacity-10 py-1 fw-bold mt-3 mt-lg-0"
-        >
-          {{ errorMessage || "MESSAGE"}}
-        </div>
-      </div>
+      <div class="col-lg-6 d-flex">
+        <form [formGroup]="loginForm" class="d-flex flex-column w-100 justify-content-evenly">
+          <h1 class="border-bottom mb-3 mb-lg-0 font-monospace">{{"LOGIN.TITLE" | translate}}</h1>
+
+          <mat-form-field class="w-100 py-1 mt-4" appearance="outline">
+            <mat-label>{{"LOGIN.USERNAME_TITLE" | translate}}</mat-label>
+            <input matInput formControlName="username" required />
+
+            <mat-error class="fs-6 text-danger pt-1">
+              <small *ngIf="loginForm.controls.username.errors?.['required']">{{"LOGIN.USERNAME_REQUIRED" | translate}}</small>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-100 py-1" appearance="outline">
+            <mat-label>{{"LOGIN.PASSWORD_TITLE" | translate}}</mat-label>
+            <input matInput [type]="isPasswordHidden ? 'password' : 'text'" formControlName="password" required/>
+            
+            <button class="hide" mat-icon-button matSuffix (click)="isPasswordHidden = !isPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordHidden">
+              <mat-icon>{{isPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
+            </button>
+
+            <mat-error class="fs-6 text-danger">
+              <small *ngIf="loginForm.controls.password.errors?.['required']">{{"LOGIN.PASSWORD_REQUIRED" | translate}}</small>
+            </mat-error>
+          </mat-form-field>
+
+          <div class="d-flex flex-column w-100">
+            <button class="btn btn-warning fs-6 shadow" type="button" (click)="onSubmit()" [disabled]="isLoading">
+              <span class="spinner-border spinner-border-sm" aria-hidden="true" *ngIf="isLoading"></span>
+              <span role="status"> {{ isLoading ? ("LOGIN.LOGGING_IN" | translate) : ("LOGIN.LOG_IN"  | translate)}}</span>
+            </button>
+
+            <small class="align-self-center mt-3 fw-light">
+              {{"LOGIN.ACCOUNT.MISSING" | translate}} <a routerLink="/registration" class="text-decoration-none">{{"LOGIN.ACCOUNT.CREATE_LINK" | translate}}</a>
+            </small>
+            <small class="align-self-center mt-1 fw-light">
+              {{"LOGIN.PASSWORD.OR" | translate}} <a routerLink="/password/forgot" class="text-decoration-none">{{"LOGIN.PASSWORD.RESET_LINK" | translate}}</a>
+            </small>
+          </div>
+        </form>
+      </div> 
+    </div> 
+    <div class="row d-flex justify-content-center text-danger overflow-hidden pe-none fs-6 text-bg-danger bg-opacity-10 py-1 fw-bold mt-2 mt-lg-0" 
+        [ngClass]="{ 'opacity-0': !isErrorReceived || !message }" style="height: 1.5rem;">
+          {{ message }}
     </div>
   </div>
 </main>

@@ -1,13 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { IComment } from 'src/app/models/comment.model';
 import { IPageResponse } from 'src/app/models/page-response.model';
 import { IPage } from 'src/app/models/page.model';
 import { CommentService } from 'src/app/services/api/comment.service';
+import { PaginationComponent } from "../../../../components/pagination/pagination.component";
+import { CommentComponent } from "../comment/comment.component";
 
 @Component({
-  selector: 'app-comments-show',
-  templateUrl: './comments-show.component.html',
-  styleUrls: ['./comments-show.component.css']
+    selector: 'app-comments-show',
+    templateUrl: './comments-show.component.html',
+    styleUrls: ['./comments-show.component.css'],
+    standalone: true,
+    imports: [CommonModule, PaginationComponent, CommentComponent]
 })
 export class CommentsShowComponent implements OnInit {
   @Input() public isLoading: boolean = false;
@@ -20,7 +25,7 @@ export class CommentsShowComponent implements OnInit {
 
   public comments: IComment[] = [];
 
-  constructor(private _commentService: CommentService){}
+  constructor(private commentService: CommentService){}
 
   ngOnInit(): void {
     this.loadComments();
@@ -36,7 +41,7 @@ export class CommentsShowComponent implements OnInit {
   private loadComments(newsId:number = this.newsId, currentPage: number = this.currentPage, itemsPerPage: number = this.itemsPerPage): void {
     this.isLoading = true;
 
-    this._commentService
+    this.commentService
     .getComments(newsId,currentPage,itemsPerPage)
     .subscribe({
       next: (data: IPageResponse) => {

@@ -1,26 +1,37 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IRegistration } from 'src/app/models/registration.model';
 import { UserService } from 'src/app/services/api/user.service';
 import Validation from './validator/matchpassword.validator';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { EMAIL_REGEX, NAME_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from 'src/app/services/regex/regex.service';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
+  standalone: true,
+  imports: [ 
+    CommonModule, MatIconModule, MatFormFieldModule, MatStepperModule,
+    TranslateModule, ReactiveFormsModule, MatInputModule, RouterLink
+  ]
 })
 export class RegistrationComponent {  
-  message: string | undefined;
-  isPasswordHidden: boolean = true;
-  isConfirmPasswordHidden: boolean = true;
-  isRegistrationFailed: boolean = false;
-  isRegistrationSuccess: boolean = false;
-  isLoading: boolean = false;
+  public message?: string;
+  public isPasswordHidden: boolean = true;
+  public isConfirmPasswordHidden: boolean = true;
+  public isRegistrationFailed: boolean = false;
+  public isRegistrationSuccess: boolean = false;
+  public isLoading: boolean = false;
 
-  userDetailsForm = this._formBuilder.group({
+  public userDetailsForm = this.formBuilder.group({
     firstName: ['', 
       [Validators.required, Validators.min(2), Validators.pattern(NAME_REGEX)]
     ],
@@ -32,7 +43,7 @@ export class RegistrationComponent {
     ],
   });
 
-  accountDetailsForm = this._formBuilder.group({
+  public accountDetailsForm = this.formBuilder.group({
     username: ['',
       [Validators.required, Validators.min(3), Validators.max(30), Validators.pattern(USERNAME_REGEX)]
     ],
@@ -47,20 +58,12 @@ export class RegistrationComponent {
   });
 
   constructor(
-    private _formBuilder: FormBuilder,
-    private _userService: UserService,
-    private _translate: TranslateService
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private translateService: TranslateService
   ) {}
-  
-  get userDetailsFormControl() {
-    return this.userDetailsForm.controls;
-  }
 
-  get accountDetailsFormControl() {
-    return this.accountDetailsForm.controls;
-  }
-
-  onSubmit(): void{
+  onSubmit(): void {
     if(this.userDetailsForm.invalid || this.accountDetailsForm.invalid) return;
 
     this.isLoading = true;
@@ -74,7 +77,7 @@ export class RegistrationComponent {
       password: this.accountDetailsForm.value.password
     };
 
-    this._userService
+    this.userService
       .register(registrationRequest)
       .subscribe({
         next: () => this.displaySuccessMessage(),
@@ -87,7 +90,7 @@ export class RegistrationComponent {
     this.isRegistrationFailed = false;
     this.isRegistrationSuccess = true;
 
-    this._translate.get("REGISTRATION.SUCCESS").subscribe(data => this.message = data)
+    this.translateService.get("REGISTRATION.SUCCESS").subscribe(data => this.message = data)
   }
 
   private displayErrorMessage(error: HttpErrorResponse): void {
@@ -95,11 +98,11 @@ export class RegistrationComponent {
     this.isRegistrationSuccess = false;
 
     if(error.status == 409 && error.error.message.toLocaleLowerCase().includes("email"))
-      this._translate.get("REGISTRATION.EMAIL_TAKEN").subscribe(data => this.message = data)
+      this.translateService.get("REGISTRATION.EMAIL_TAKEN").subscribe(data => this.message = data)
     else if(error.status == 409 && error.error.message.toLocaleLowerCase().includes("username"))
-      this._translate.get("REGISTRATION.NAME_TAKEN").subscribe(data => this.message = data)
+      this.translateService.get("REGISTRATION.NAME_TAKEN").subscribe(data => this.message = data)
     else
-      this._translate.get("REGISTRATION.SERVER_ERROR").subscribe(data => this.message = data)
+      this.translateService.get("REGISTRATION.SERVER_ERROR").subscribe(data => this.message = data)
   }
   
 }

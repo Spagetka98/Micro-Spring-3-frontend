@@ -1,38 +1,40 @@
+import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { EmailService } from 'src/app/services/api/email.service';
 
 @Component({
   selector: 'app-email-verification',
   templateUrl: './email-verification.component.html',
-  styleUrls: ['./email-verification.component.css']
+  styleUrls: ['./email-verification.component.css'],
+  standalone: true,
+  imports: [CommonModule, TranslateModule, RouterLink]
 })
 export class EmailVerificationComponent implements OnInit {
-  private token: string | null | undefined;
-  public message: string | undefined;
+  public message?: string;
   public isLoading: boolean = false;
-  public isConfirmationFailed: boolean = false;
-  public isConfirmationSuccess: boolean = false;
+  public isValidationFailed: boolean = false;
+  public isValidationSuccess: boolean = false;
 
   constructor(
-    private _activatedRoute: ActivatedRoute,
-    private _emailService: EmailService,
-    private _translate: TranslateService
+    private activatedRoute: ActivatedRoute,
+    private emailService: EmailService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
-    this.token = this._activatedRoute.snapshot.paramMap.get("token");
-    if(this.token) this.validateEmailToken(this.token);
+    const token = this.activatedRoute.snapshot.paramMap.get("token");
+    if(token) this.validateEmailToken(token);
   }
 
-  private validateEmailToken(token: string) {
+  private validateEmailToken(token: string): void {
     this.isLoading = true;
-    this.isConfirmationFailed = false;
-    this.isConfirmationSuccess = false;
+    this.isValidationFailed = false;
+    this.isValidationSuccess = false;
 
-    this._emailService
+    this.emailService
       .emailConfirmation(token)
       .subscribe({
         next: () => this.displaySuccessMessage(),
@@ -42,23 +44,23 @@ export class EmailVerificationComponent implements OnInit {
   }
 
   private displaySuccessMessage(): void {
-    this.isConfirmationFailed = false;
-    this.isConfirmationSuccess = true;
+    this.isValidationFailed = false;
+    this.isValidationSuccess = true;
 
-    this._translate.get("CONFIRMATION_EMAIL.SUCCESS").subscribe(data => this.message = data)
+    this.translateService.get("CONFIRMATION_EMAIL.SUCCESS").subscribe(data => this.message = data)
   }
 
   private displayErrorMessage(error: HttpErrorResponse): void {
-    this.isConfirmationFailed = true;
-    this.isConfirmationSuccess = false;
+    this.isValidationFailed = true;
+    this.isValidationSuccess = false;
 
     switch (error.status) {
       case 423: {
-        this._translate.get("CONFIRMATION_EMAIL.FAILED_EXPIRATION").subscribe(data => this.message = data)
+        this.translateService.get("CONFIRMATION_EMAIL.FAILED_EXPIRATION").subscribe(data => this.message = data)
         break;
       }
       default: {
-        this._translate.get("CONFIRMATION_EMAIL.FAILED_SERVER").subscribe(data => this.message = data)
+        this.translateService.get("CONFIRMATION_EMAIL.FAILED_SERVER").subscribe(data => this.message = data)
         break;
       }
     }

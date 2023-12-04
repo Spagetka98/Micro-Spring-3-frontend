@@ -1,6 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { OnInit , Component, Input, Output, EventEmitter } from '@angular/core';
-import { Role } from 'src/app/components/enums/role.enum';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { Role } from 'src/app/enums/role.enum';
 import { INews } from 'src/app/models/news.model';
 import { IUser } from 'src/app/models/user.model';
 import { API_GET_NEWS_IMG } from 'src/app/services/api/api.path';
@@ -10,7 +16,12 @@ import { UserService } from 'src/app/services/api/user.service';
 @Component({
   selector: 'app-news-window',
   templateUrl: './news-window.component.html',
-  styleUrls: ['./news-window.component.css']
+  styleUrls: ['./news-window.component.css'], 
+  standalone: true,
+  imports: [
+    CommonModule, MatCardModule, TranslateModule, MatProgressBarModule, RouterLink,
+    MatButtonModule
+  ]
 })
 export class NewsWindowComponent implements OnInit {
   @Input({ required: true }) news!: INews; 
@@ -26,8 +37,8 @@ export class NewsWindowComponent implements OnInit {
   public IMG_PATH: string = API_GET_NEWS_IMG;
   
   constructor(
-    private _userService: UserService,
-    private _newsService: NewsService){
+    private userService: UserService,
+    private newsService: NewsService){
   }
   
   ngOnInit() {
@@ -55,7 +66,7 @@ export class NewsWindowComponent implements OnInit {
   private loadAuthorDetails(): void {
     this.isLoading = true;
 
-    this._userService.getUserDetails(this.news.userId)
+    this.userService.getUserDetails(this.news.userId)
     .subscribe({
       next: (data: IUser) => {
         this.username = data.username;
@@ -68,7 +79,7 @@ export class NewsWindowComponent implements OnInit {
   private addLike(newsId: number): void {
     this.isLoading = true;
 
-    this._newsService.addLike(newsId)
+    this.newsService.addLike(newsId)
     .subscribe({
       next: () => {
         this.news.isLikedByUser = true;
@@ -81,7 +92,7 @@ export class NewsWindowComponent implements OnInit {
   private removeLike(newsId: number): void {
     this.isLoading = true;
 
-    this._newsService.removeLike(newsId)
+    this.newsService.removeLike(newsId)
     .subscribe({
       next: () => {
         this.news.isLikedByUser = false;
@@ -93,7 +104,7 @@ export class NewsWindowComponent implements OnInit {
   private addDislike(newsId: number): void {
     this.isLoading = true;
 
-    this._newsService.addDislike(newsId)
+    this.newsService.addDislike(newsId)
     .subscribe({
       next: () => {
         this.news.isDislikedByUser = true;
@@ -106,7 +117,7 @@ export class NewsWindowComponent implements OnInit {
   private removeDislike(newsId: number): void {
     this.isLoading = true;
 
-    this._newsService.removeDislike(newsId)
+    this.newsService.removeDislike(newsId)
     .subscribe({
       next: () => {
         this.news.isDislikedByUser = false;

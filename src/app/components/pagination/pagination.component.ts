@@ -1,10 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { TranslateModule } from '@ngx-translate/core';
 import { IPage } from 'src/app/models/page.model';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css']
+  styleUrls: ['./pagination.component.css'],
+  standalone: true,
+  imports: [CommonModule, TranslateModule, MatMenuModule, MatButtonModule]
 })
 export class PaginationComponent {
   private _currentPage: number = 0;

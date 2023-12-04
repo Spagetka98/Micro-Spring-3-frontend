@@ -130,6 +130,12 @@
         "DELETE": "Smazat",
         "MORE": "Více"
     },
+    "NEWS_DETAILS": {
+        "WRITTEN": "Napsáno",
+        "BY_USER": "uživatelem",
+        "DAY": "dne:",
+        "COMMENTS": "Komentáře"
+    },
     "ROLE_USER": "Uživatel",
     "ROLE_EDITOR": "Editor",
     "ROLE_ADMIN": "Admin"

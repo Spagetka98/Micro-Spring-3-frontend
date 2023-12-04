@@ -1,3 +1,13 @@
 .purple{
     border: 2px solid #6610f2;
 }
+
+.box {
+    width: 100%;
+}
+  
+@media screen and (min-width: 992px) {
+    .box {
+        width: 55%;
+    }
+}

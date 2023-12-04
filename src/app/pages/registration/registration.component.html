@@ -1,125 +1,121 @@
-<main
-  class="container d-flex justify-content-center align-items-center min-vh-100"
->
-  <div class="row shadow bg-white rounded-4 overflow-hidden purple">
-    <div class="col-12">
-      <div class="row">
-        <div class="col-lg-6">
-          <img
-            src="https://img.freepik.com/free-vector/user-verification-unauthorized-access-prevention-private-account-authentication-cyber-security-people-entering-login-password-safety-measures_335657-3530.jpg"
-            alt="registration_pic"
-            class="img-fluid"
-          />
-        </div>
-        <div class="col-lg-6">
-          <h1 class="text-center font-monospace border-bottom mt-4">{{"REGISTRATION.TITLE" | translate}}</h1>
-          <mat-vertical-stepper linear="true">
-            <mat-step [stepControl]="userDetailsForm" completed="false">
-              <form [formGroup]="userDetailsForm">
-                <ng-template matStepLabel>{{"REGISTRATION.DETAILS_FORM.TITLE" | translate}}</ng-template>
-                
-                <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.TITLE" | translate}}</mat-label>
-                  <input matInput placeholder="Petr" formControlName="firstName" required minlength="2"/>
-
-                  <mat-error class="fs-6 text-danger">
-                    <small *ngIf="userDetailsFormControl.firstName.errors?.['required']">{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.REQUIRED" | translate}}</small>
-                    <small *ngIf="userDetailsFormControl.firstName.errors?.['minlength']">{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.MIN_LENGTH" | translate}}</small>
-                    <small *ngIf="!userDetailsFormControl.firstName.errors?.['minlength'] && userDetailsFormControl.firstName.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.PATTERN" | translate}}</small>
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.TITLE" | translate}}</mat-label>
-                  <input matInput placeholder="Novák" formControlName="lastName" required minlength="2"/>
-
-                  <mat-error class="fs-6 text-danger">
-                    <small *ngIf="userDetailsFormControl.lastName.errors?.['required']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.REQUIRED" | translate}}</small>
-                    <small *ngIf="userDetailsFormControl.lastName.errors?.['minlength']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.MIN_LENGTH" | translate}}</small>
-                    <small *ngIf="!userDetailsFormControl.lastName.errors?.['minlength'] && userDetailsFormControl.lastName.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.PATTERN" | translate}}</small>
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>{{"REGISTRATION.DETAILS_FORM.EMAIL_INPUT.TITLE" | translate}}</mat-label>
-                  <input matInput placeholder="Petr.novak@gmail.com" formControlName="email" required/>
-
-                  <mat-error class="fs-6 text-danger">
-                    <small *ngIf="userDetailsFormControl.email.errors?.['required']">{{"REGISTRATION.DETAILS_FORM.EMAIL_INPUT.REQUIRED" | translate}}</small>
-                    <small *ngIf="userDetailsFormControl.email.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.EMAIL_INPUT.PATTERN" | translate}}</small>
-                  </mat-error>
-                </mat-form-field>
-                <div class="d-flex w-100 justify-content-center">
-                  <button mat-button matStepperNext class="btn btn-outline-warning px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-arrow-down fs-4"></i></button>                        
-                </div>
-            </form>
-            </mat-step>
-            <mat-step [stepControl]="accountDetailsForm" completed="false">
-              <form [formGroup]="accountDetailsForm">
-                <ng-template matStepLabel>{{"REGISTRATION.ACCOUNT_FORM.TITLE" | translate}}</ng-template>
-
-                <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.TITLE" | translate}}</mat-label>
-                  <input matInput placeholder="Petr98" formControlName="username" required minlength="3" maxlength="30"/>
-
-                  <mat-error class="fs-6 text-danger">
-                    <small *ngIf="accountDetailsFormControl.username.errors?.['required']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.REQUIRED" | translate}}</small>
-                    <small *ngIf="accountDetailsFormControl.username.errors?.['minlength']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.MIN_LENGTH" | translate}}</small>
-                    <small *ngIf="accountDetailsFormControl.username.errors?.['maxlength']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.MAX_LENGTH" | translate}}</small>
-                    <small *ngIf="!accountDetailsFormControl.username.errors?.['minlength'] && accountDetailsFormControl.username.errors?.['pattern']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.PATTERN" | translate}}</small>
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.TITLE" | translate}}</mat-label>
-                  <input [type]="isPasswordHidden ? 'password' : 'text'" matInput formControlName="password" required minlength="8"/>
-                  <button class="hide" mat-icon-button matSuffix (click)="isPasswordHidden = !isPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordHidden">
-                    <mat-icon>{{isPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
-                  </button>
-                  <mat-error class="fs-6 text-danger">
-                    <small *ngIf="accountDetailsFormControl.password.errors?.['required']">{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.REQUIRED" | translate}}</small>
-                    <small *ngIf="accountDetailsFormControl.password.errors?.['minlength']">{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.MIN_LENGTH" | translate}}</small>
-                    <small *ngIf="!accountDetailsFormControl.password.errors?.['minlength'] && accountDetailsFormControl.password.errors?.['pattern']">{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.PATTERN" | translate}}</small>
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>{{"REGISTRATION.ACCOUNT_FORM.CORRECT_PASSWORD_INPUT.TITLE" | translate}}</mat-label>
-                  <input [type]="isConfirmPasswordHidden ? 'password' : 'text'" matInput formControlName="confirmPassword" required />
-                  <button class="hide" mat-icon-button matSuffix (click)="isConfirmPasswordHidden = !isConfirmPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isConfirmPasswordHidden">
-                    <mat-icon>{{isConfirmPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
-                  </button>
-
-                  <mat-error class="fs-6 text-danger">
-                    <small *ngIf="accountDetailsFormControl.confirmPassword.errors?.['required']">{{"REGISTRATION.ACCOUNT_FORM.CORRECT_PASSWORD_INPUT.REQUIRED" | translate}}</small>
-                    <small *ngIf="!accountDetailsFormControl.confirmPassword.errors?.['required'] && !accountDetailsFormControl.password.errors?.['matching']">{{"REGISTRATION.ACCOUNT_FORM.CORRECT_PASSWORD_INPUT.NOT_MATCHING" | translate}}</small>
-                  </mat-error>
-                </mat-form-field>
-
-                <div class="d-flex flex-column">
-                  <div class="d-flex w-100 justify-content-between align-items-center">
-                    <button [disabled]="isLoading" mat-button matStepperPrevious class="btn btn-outline-danger px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-arrow-up fs-4"></i></button>                                      
-            
-                    <div *ngIf="isLoading" class="spinner-grow text-warning fs-4" role="status">
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                    
-                    <button [disabled]="isLoading" (click)="onSubmit()" mat-button class="btn btn-outline-success px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-check-lg fs-4"></i></button> 
-                          
-                  </div>
-                  <small class="w-100 text-center mt-4 fs-6" [ngClass]="{'text-success' : isRegistrationSuccess,'text-danger' : isRegistrationFailed}">{{message}}</small>
-                </div>
-              
-              </form>
-            </mat-step>
-          </mat-vertical-stepper>
-        </div>
+<main class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="container shadow bg-white rounded-4 overflow-hidden purple">
+    <div class="row">
+      <div class="col-lg-6">
+        <img
+          src="https://img.freepik.com/free-vector/user-verification-unauthorized-access-prevention-private-account-authentication-cyber-security-people-entering-login-password-safety-measures_335657-3530.jpg"
+          alt="registration_pic"
+          class="img-fluid pe-none"
+        />
       </div>
+      <div class="col-lg-6">
+        <h1 class="text-center font-monospace border-bottom mt-4">{{"REGISTRATION.TITLE" | translate}}</h1>
+        <mat-vertical-stepper linear="true">
+          <mat-step [stepControl]="userDetailsForm" completed="false">
+            <form [formGroup]="userDetailsForm">
+              <ng-template matStepLabel>{{"REGISTRATION.DETAILS_FORM.TITLE" | translate}}</ng-template>
+                
+              <mat-form-field class="w-100 py-1" appearance="outline">
+                <mat-label>{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.TITLE" | translate}}</mat-label>
+                <input matInput placeholder="Petr" formControlName="firstName" required minlength="2"/>
+
+                <mat-error class="fs-6 text-danger">
+                  <small *ngIf="this.userDetailsForm.controls.firstName.errors?.['required']">{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.REQUIRED" | translate}}</small>
+                  <small *ngIf="this.userDetailsForm.controls.firstName.errors?.['minlength']">{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.MIN_LENGTH" | translate}}</small>
+                  <small *ngIf="!this.userDetailsForm.controls.firstName.errors?.['minlength'] && this.userDetailsForm.controls.firstName.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.FIRST_NAME_INPUT.PATTERN" | translate}}</small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="w-100 py-1" appearance="outline">
+                <mat-label>{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.TITLE" | translate}}</mat-label>
+                <input matInput placeholder="Novák" formControlName="lastName" required minlength="2"/>
+
+                <mat-error class="fs-6 text-danger">
+                  <small *ngIf="this.userDetailsForm.controls.lastName.errors?.['required']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.REQUIRED" | translate}}</small>
+                  <small *ngIf="this.userDetailsForm.controls.lastName.errors?.['minlength']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.MIN_LENGTH" | translate}}</small>
+                  <small *ngIf="!this.userDetailsForm.controls.lastName.errors?.['minlength'] && this.userDetailsForm.controls.lastName.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.LAST_NAME_INPUT.PATTERN" | translate}}</small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="w-100 py-1" appearance="outline">
+                <mat-label>{{"REGISTRATION.DETAILS_FORM.EMAIL_INPUT.TITLE" | translate}}</mat-label>
+                <input matInput placeholder="Petr.novak@gmail.com" formControlName="email" required/>
+
+                <mat-error class="fs-6 text-danger">
+                  <small *ngIf="this.userDetailsForm.controls.email.errors?.['required']">{{"REGISTRATION.DETAILS_FORM.EMAIL_INPUT.REQUIRED" | translate}}</small>
+                  <small *ngIf="this.userDetailsForm.controls.email.errors?.['pattern']">{{"REGISTRATION.DETAILS_FORM.EMAIL_INPUT.PATTERN" | translate}}</small>
+                </mat-error>
+              </mat-form-field>
+              <div class="d-flex w-100 justify-content-center">
+                <button mat-button matStepperNext class="btn btn-outline-warning px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-arrow-down fs-4"></i></button>                        
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="accountDetailsForm" completed="false">
+            <form [formGroup]="accountDetailsForm">
+              <ng-template matStepLabel>{{"REGISTRATION.ACCOUNT_FORM.TITLE" | translate}}</ng-template>
+
+              <mat-form-field class="w-100 py-1" appearance="outline">
+                <mat-label>{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.TITLE" | translate}}</mat-label>
+                <input matInput placeholder="Petr98" formControlName="username" required minlength="3" maxlength="30"/>
+
+                <mat-error class="fs-6 text-danger">
+                  <small *ngIf="this.accountDetailsForm.controls.username.errors?.['required']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.REQUIRED" | translate}}</small>
+                  <small *ngIf="this.accountDetailsForm.controls.username.errors?.['minlength']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.MIN_LENGTH" | translate}}</small>
+                  <small *ngIf="this.accountDetailsForm.controls.username.errors?.['maxlength']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.MAX_LENGTH" | translate}}</small>
+                  <small *ngIf="!this.accountDetailsForm.controls.username.errors?.['minlength'] && this.accountDetailsForm.controls.username.errors?.['pattern']">{{"REGISTRATION.ACCOUNT_FORM.USERNAME_INPUT.PATTERN" | translate}}</small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="w-100 py-1" appearance="outline">
+                <mat-label>{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.TITLE" | translate}}</mat-label>
+                <input [type]="isPasswordHidden ? 'password' : 'text'" matInput formControlName="password" required minlength="8"/>
+                <button class="hide" mat-icon-button matSuffix (click)="isPasswordHidden = !isPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordHidden">
+                  <mat-icon>{{isPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
+                </button>
+                <mat-error class="fs-6 text-danger">
+                  <small *ngIf="this.accountDetailsForm.controls.password.errors?.['required']">{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.REQUIRED" | translate}}</small>
+                  <small *ngIf="this.accountDetailsForm.controls.password.errors?.['minlength']">{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.MIN_LENGTH" | translate}}</small>
+                  <small *ngIf="!this.accountDetailsForm.controls.password.errors?.['minlength'] && this.accountDetailsForm.controls.password.errors?.['pattern']">{{"REGISTRATION.ACCOUNT_FORM.PASSWORD_INPUT.PATTERN" | translate}}</small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="w-100 py-1" appearance="outline">
+                <mat-label>{{"REGISTRATION.ACCOUNT_FORM.CORRECT_PASSWORD_INPUT.TITLE" | translate}}</mat-label>
+                <input [type]="isConfirmPasswordHidden ? 'password' : 'text'" matInput formControlName="confirmPassword" required />
+                <button class="hide" mat-icon-button matSuffix (click)="isConfirmPasswordHidden = !isConfirmPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isConfirmPasswordHidden">
+                  <mat-icon>{{isConfirmPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
+                </button>
+
+                <mat-error class="fs-6 text-danger">
+                  <small *ngIf="this.accountDetailsForm.controls.confirmPassword.errors?.['required']">{{"REGISTRATION.ACCOUNT_FORM.CORRECT_PASSWORD_INPUT.REQUIRED" | translate}}</small>
+                  <small *ngIf="!this.accountDetailsForm.controls.confirmPassword.errors?.['required'] && !this.accountDetailsForm.controls.password.errors?.['matching']">{{"REGISTRATION.ACCOUNT_FORM.CORRECT_PASSWORD_INPUT.NOT_MATCHING" | translate}}</small>
+                </mat-error>
+              </mat-form-field>
+
+              <div class="d-flex flex-column">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                  <button [disabled]="isLoading" mat-button matStepperPrevious class="btn btn-outline-danger px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-arrow-up fs-4"></i></button>                                      
+            
+                  <div *ngIf="isLoading" class="spinner-grow text-warning fs-4" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                    
+                  <button [disabled]="isLoading" (click)="onSubmit()" mat-button class="btn btn-outline-success px-3 py-2 rounded-circle shadow-sm"><i class="bi bi-check-lg fs-4"></i></button> 
+                          
+                </div>
+                <small class="w-100 text-center mt-4 fs-6" [ngClass]="{'text-success' : isRegistrationSuccess,'text-danger' : isRegistrationFailed}">{{message}}</small>
+              </div>
+              
+            </form>
+          </mat-step>
+        </mat-vertical-stepper>
+      </div>
+    </div>
       <div class="row">
         <small class="w-100 text-center fw-light mb-2 fs-6">{{"REGISTRATION.ACCOUNT" | translate}} 
           <a routerLink="/login" class="text-decoration-none">{{"REGISTRATION.ACCOUNT_LINK" | translate}}</a>
         </small>
       </div>
-    </div>
   </div>
 </main>

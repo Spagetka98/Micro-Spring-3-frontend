@@ -1,63 +1,46 @@
-<main
-  class="container d-flex justify-content-center align-items-center min-vh-100"
->
-  <div class="row shadow bg-white rounded-4 overflow-hidden purple">
-    <div class="col-12">
-      <div class="row">
-          <h1 class="text-center font-monospace border-bottom mt-4">{{"RESET_PASS.TITLE" | translate}}</h1>
+<main class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="container box shadow bg-white rounded-4 overflow-hidden purple">
+    <div class="row">
+      <h1 class="text-center font-monospace border-bottom mt-4">{{"RESET_PASS.TITLE" | translate}}</h1>
   
-              <form [formGroup]="resetForm">
-                <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>{{"RESET_PASS.PASSWORD_INPUT.TITLE" | translate}}</mat-label>
-                  <input [type]="isPasswordHidden ? 'password' : 'text'" matInput formControlName="password" required minlength="8"/>
-                  <button class="hide" mat-icon-button matSuffix (click)="isPasswordHidden = !isPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordHidden">
-                    <mat-icon>{{isPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
-                  </button>
-                  <mat-error class="fs-6 text-danger">
-                    <small *ngIf="resetFormControl.password.errors?.['required']">{{"RESET_PASS.PASSWORD_INPUT.REQUIRED" | translate}}</small>
-                    <small *ngIf="resetFormControl.password.errors?.['minlength']">{{"RESET_PASS.PASSWORD_INPUT.MIN_LENGTH" | translate}}</small>
-                    <small *ngIf="!resetFormControl.password.errors?.['minlength'] && resetFormControl.password.errors?.['pattern']">{{"RESET_PASS.PASSWORD_INPUT.PATTERN" | translate}}</small>
-                  </mat-error>
-                </mat-form-field>
+      <form [formGroup]="resetForm">
+        <mat-form-field class="w-100 py-1" appearance="outline">
+          <mat-label>{{"RESET_PASS.PASSWORD_INPUT.TITLE" | translate}}</mat-label>
+          <input [type]="isPasswordHidden ? 'password' : 'text'" matInput formControlName="password" required minlength="8"/>
+          <button class="hide" mat-icon-button matSuffix (click)="isPasswordHidden = !isPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordHidden">
+            <mat-icon>{{isPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
+          </button>
+          <mat-error class="fs-6 text-danger">
+            <small *ngIf="this.resetForm.controls.password.errors?.['required']">{{"RESET_PASS.PASSWORD_INPUT.REQUIRED" | translate}}</small>
+            <small *ngIf="this.resetForm.controls.password.errors?.['minlength']">{{"RESET_PASS.PASSWORD_INPUT.MIN_LENGTH" | translate}}</small>
+            <small *ngIf="!this.resetForm.controls.password.errors?.['minlength'] && this.resetForm.controls.password.errors?.['pattern']">{{"RESET_PASS.PASSWORD_INPUT.PATTERN" | translate}}</small>
+          </mat-error>
+        </mat-form-field>
 
-                <mat-form-field class="w-100 py-1" appearance="outline">
-                  <mat-label>{{"RESET_PASS.CORRECT_PASSWORD_INPUT.TITLE" | translate}}</mat-label>
-                  <input [type]="isConfirmPasswordHidden ? 'password' : 'text'" matInput formControlName="confirmPassword" required />
-                  <button class="hide" mat-icon-button matSuffix (click)="isConfirmPasswordHidden = !isConfirmPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isConfirmPasswordHidden">
-                    <mat-icon>{{isConfirmPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
-                  </button>
+        <mat-form-field class="w-100 py-1" appearance="outline">
+          <mat-label>{{"RESET_PASS.CORRECT_PASSWORD_INPUT.TITLE" | translate}}</mat-label>
+          <input [type]="isConfirmPasswordHidden ? 'password' : 'text'" matInput formControlName="confirmPassword" required />
+          <button class="hide" mat-icon-button matSuffix (click)="isConfirmPasswordHidden = !isConfirmPasswordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isConfirmPasswordHidden">
+            <mat-icon>{{isConfirmPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
+          </button>
 
-                  <mat-error class="fs-6 text-danger">
-                    <small *ngIf="resetFormControl.confirmPassword.errors?.['required']">{{"RESET_PASS.CORRECT_PASSWORD_INPUT.REQUIRED" | translate}}</small>
-                    <small *ngIf="!resetFormControl.confirmPassword.errors?.['required'] && !resetFormControl.password.errors?.['matching']">{{"RESET_PASS.CORRECT_PASSWORD_INPUT.NOT_MATCHING" | translate}}</small>
-                  </mat-error>
-                </mat-form-field>
+          <mat-error class="fs-6 text-danger">
+            <small *ngIf="this.resetForm.controls.confirmPassword.errors?.['required']">{{"RESET_PASS.CORRECT_PASSWORD_INPUT.REQUIRED" | translate}}</small>
+            <small *ngIf="!this.resetForm.controls.confirmPassword.errors?.['required'] && !this.resetForm.controls.password.errors?.['matching']">{{"RESET_PASS.CORRECT_PASSWORD_INPUT.NOT_MATCHING" | translate}}</small>
+          </mat-error>
+        </mat-form-field>
 
-                  <div class="d-flex w-100 justify-content-center">
-                    <button
-                    class="btn btn-warning fs-6 shadow mb-3"
-                    type="button"
-                    (click)="onSubmit()"
-                    [disabled]="isLoading || isResetSuccess"
-                  >
-                    <span
-                      class="spinner-border spinner-border-sm"
-                      aria-hidden="true"
-                      *ngIf="isLoading"
-                    ></span>
-                    <span role="status"> {{ isLoading ? ("RESET_PASS.CHANGING" | translate) : ("RESET_PASS.CHANGE"  | translate)}}</span>
-                  </button>                          
-                  </div>
-              </form>
-      </div>
-      <div class="row">
-        <small
-          [ngClass]="{ 'opacity-0': !message, 'text-success' : isResetSuccess,'text-danger' : isResetFailed}"
-          class="pe-none text-center fs-6 bg-opacity-10 py-1 fw-bold mt-3 mt-lg-0"
-        >
-          {{ message || "MESSAGE"}}
-        </small>
-      </div>
+        <div class="d-flex w-100 justify-content-center">
+          <button class="btn btn-warning fs-6 shadow mb-3" type="button" (click)="onSubmit()" [disabled]="isLoading || isResetSuccess">
+            <span class="spinner-border spinner-border-sm" aria-hidden="true" *ngIf="isLoading"></span>
+            <span role="status"> {{ isLoading ? ("RESET_PASS.CHANGING" | translate) : ("RESET_PASS.CHANGE"  | translate)}}</span>
+          </button>                          
+        </div>
+      </form>
+    </div>
+    <div class="row pe-none text-center fs-6 bg-opacity-10 py-1 fw-bold mt-3 mt-lg-0" style="height: 1.5rem;"
+      [ngClass]="{ 'opacity-0': !message, 'text-success' : isResetSuccess,'text-danger' : isResetFailed}">
+        {{ message }}
     </div>
   </div>
 </main>

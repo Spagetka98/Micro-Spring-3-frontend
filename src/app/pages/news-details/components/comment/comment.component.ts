@@ -1,4 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { IComment } from 'src/app/models/comment.model';
 import { IUser } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/api/user.service';
@@ -6,7 +9,9 @@ import { UserService } from 'src/app/services/api/user.service';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.css']
+  styleUrls: ['./comment.component.css'],
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatProgressBarModule]
 })
 export class CommentComponent implements OnInit {
   @Input({required:true}) public comment!: IComment;
@@ -15,7 +20,7 @@ export class CommentComponent implements OnInit {
   public author?: IUser;
 
   constructor(
-    private _userService: UserService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +30,7 @@ export class CommentComponent implements OnInit {
   private loadAuthorDetails(userId: string): void {
     this.isLoading = true;
 
-    this._userService.getUserDetails(userId)
+    this.userService.getUserDetails(userId)
     .subscribe({
       next: (data: IUser) => this.author = data,
       error: () => console.log("error"),

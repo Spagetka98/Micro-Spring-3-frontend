@@ -1,15 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { INews } from 'src/app/models/news.model';
 import { IUser } from 'src/app/models/user.model';
 import { API_GET_NEWS_IMG } from 'src/app/services/api/api.path';
 import { NewsService } from 'src/app/services/api/news.service';
 import { UserService } from 'src/app/services/api/user.service';
+import { CommentsShowComponent } from "./components/comments-show/comments-show.component";
 
 @Component({
-  selector: 'app-news-details',
-  templateUrl: './news-details.component.html',
-  styleUrls: ['./news-details.component.css']
+    selector: 'app-news-details',
+    templateUrl: './news-details.component.html',
+    styleUrls: ['./news-details.component.css'],
+    standalone: true,
+    imports: [CommonModule, TranslateModule, CommentsShowComponent]
 })
 export class NewsDetailsComponent implements OnInit {
   public isLoading: boolean = false;
@@ -18,13 +23,13 @@ export class NewsDetailsComponent implements OnInit {
   public IMG_PATH: string = API_GET_NEWS_IMG
 
   constructor(
-    private _activatedRoute: ActivatedRoute,
-    private _newsService: NewsService,
-    private _userService: UserService
+    private activatedRoute: ActivatedRoute,
+    private newsService: NewsService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
-    const id: string | null = this._activatedRoute.snapshot.paramMap.get("id");
+    const id: string | null = this.activatedRoute.snapshot.paramMap.get("id");
     if(id) this.loadNewsDetails(id);
   }
 
@@ -35,7 +40,7 @@ export class NewsDetailsComponent implements OnInit {
   private loadNewsDetails(id: string): void {
     this.isLoading = true;
 
-    this._newsService.getNewsById(Number(id))
+    this.newsService.getNewsById(Number(id))
     .subscribe({
       next: (data) => {
         this.news = data
@@ -49,7 +54,7 @@ export class NewsDetailsComponent implements OnInit {
   private loadAuthorDetails(userId: string): void {
     this.isLoading = true;
 
-    this._userService.getUserDetails(userId)
+    this.userService.getUserDetails(userId)
     .subscribe({
       next: (data: IUser) => {
         this.author = data;

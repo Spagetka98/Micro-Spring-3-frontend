@@ -1,44 +1,48 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { RouterLink } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PasswordService } from 'src/app/services/api/password.service';
 import { EMAIL_REGEX } from 'src/app/services/regex/regex.service';
 
 @Component({
   selector: 'app-forget-pass-email',
   templateUrl: './forget-pass-email.component.html',
-  styleUrls: ['./forget-pass-email.component.css']
+  styleUrls: ['./forget-pass-email.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule, TranslateModule, ReactiveFormsModule, 
+    MatFormFieldModule, MatInputModule, RouterLink
+  ]
 })
 export class ForgetPassEmailComponent {
-  forgetForm = this._formBuilder.group({
+  public forgetForm = this.formBuilder.group({
     email: ['',
       [Validators.required, Validators.pattern(EMAIL_REGEX)]
     ],
   });
-
-  message: string | undefined;
-  isLoading: boolean = false;
-  isResetFailed: boolean = false;
-  isResetSuccess: boolean = false;
-
-  get forgetFormControl(){
-    return this.forgetForm.controls;
-  }
+  public message?: string;
+  public isLoading: boolean = false;
+  public isResetFailed: boolean = false;
+  public isResetSuccess: boolean = false;
 
   constructor(
-    private _formBuilder: FormBuilder,
-    private _password: PasswordService,
-    private _translate: TranslateService
+    private formBuilder: FormBuilder,
+    private passwordService: PasswordService,
+    private translateService: TranslateService
   ) {}
 
   public onSubmit(): void {
-    this.forgetFormControl.email.markAsTouched();
+    this.forgetForm.controls.email.markAsTouched();
 
     if (this.forgetForm.invalid) return;
 
     this.isLoading = true;
 
-    this._password
+    this.passwordService
       .sendRefreshEmail(this.forgetForm.value.email!)
       .subscribe({
         next: () => this.displaySuccessMessage(),
@@ -51,13 +55,13 @@ export class ForgetPassEmailComponent {
     this.isResetFailed = false;
     this.isResetSuccess = true;
 
-    this._translate.get("FORGET_PASS.SUCCESS").subscribe(data => this.message = data)
+    this.translateService.get("FORGET_PASS.SUCCESS").subscribe(data => this.message = data)
   }
 
   private displayErrorMessage(): void {
     this.isResetFailed = true;
     this.isResetSuccess = false;
 
-    this._translate.get("FORGET_PASS.FAILED").subscribe(data => this.message = data)
+    this.translateService.get("FORGET_PASS.FAILED").subscribe(data => this.message = data)
   }
 }
