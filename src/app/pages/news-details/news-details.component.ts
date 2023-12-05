@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { INews } from 'src/app/models/news.model';
@@ -17,16 +17,14 @@ import { CommentsShowComponent } from "./components/comments-show/comments-show.
     imports: [CommonModule, TranslateModule, CommentsShowComponent]
 })
 export class NewsDetailsComponent implements OnInit {
+  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private newsService: NewsService = inject(NewsService);
+  private userService: UserService = inject(UserService);
+
   public isLoading: boolean = false;
   public news?: INews;
   public author?: IUser;
   public IMG_PATH: string = API_GET_NEWS_IMG
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private newsService: NewsService,
-    private userService: UserService
-  ) {}
 
   ngOnInit(): void {
     const id: string | null = this.activatedRoute.snapshot.paramMap.get("id");

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { OnInit , Component, Input, Output, EventEmitter } from '@angular/core';
+import { OnInit , Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -24,6 +24,9 @@ import { UserService } from 'src/app/services/api/user.service';
   ]
 })
 export class NewsWindowComponent implements OnInit {
+  private userService: UserService = inject(UserService);
+  private newsService: NewsService = inject(NewsService);
+
   @Input({ required: true }) news!: INews; 
   @Input() isLoading: boolean = false;
   @Input() currentUserRole: Role = Role.ROLE_USER;
@@ -31,15 +34,10 @@ export class NewsWindowComponent implements OnInit {
   @Output() onDelete = new EventEmitter<number>();
   @Output() onUpdate = new EventEmitter<number>();
 
-  public username: string = "";
-  public role: string = "";
+  public username?: string;
+  public role?: string;
   public Roles = Role
   public IMG_PATH: string = API_GET_NEWS_IMG;
-  
-  constructor(
-    private userService: UserService,
-    private newsService: NewsService){
-  }
   
   ngOnInit() {
     this.loadAuthorDetails();

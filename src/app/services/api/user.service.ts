@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -10,24 +10,24 @@ import { IRegistration } from 'src/app/models/registration.model';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private _http: HttpClient) {}
+  private http: HttpClient = inject(HttpClient);
 
   public login(username: string, password: string): Observable<IUser> {
-    return this._http.post<IUser>(API_POST_LOGIN, { username, password });
+    return this.http.post<IUser>(API_POST_LOGIN, { username, password });
   }
 
   public register(registration: IRegistration): Observable<{}> {
-    return this._http.post(API_POST_REGISTRATION, registration);
+    return this.http.post(API_POST_REGISTRATION, registration);
   }
 
   public logout(): Observable<{}> {
-    return this._http.get(API_GET_LOGOUT);
+    return this.http.get(API_GET_LOGOUT);
   }
 
   public getUserDetails(userId: string): Observable<IUser> {
     let params = new HttpParams();
     params = params.append("id",userId);
 
-    return this._http.get<IUser>(API_GET_USER_DETAILS,{params: params})
+    return this.http.get<IUser>(API_GET_USER_DETAILS,{params: params})
   }
 }

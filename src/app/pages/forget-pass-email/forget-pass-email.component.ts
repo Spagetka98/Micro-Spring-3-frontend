@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,6 +19,10 @@ import { EMAIL_REGEX } from 'src/app/services/regex/regex.service';
   ]
 })
 export class ForgetPassEmailComponent {
+  private formBuilder: FormBuilder = inject(FormBuilder);
+  private passwordService: PasswordService = inject(PasswordService);
+  private translateService: TranslateService = inject(TranslateService);
+
   public forgetForm = this.formBuilder.group({
     email: ['',
       [Validators.required, Validators.pattern(EMAIL_REGEX)]
@@ -28,12 +32,6 @@ export class ForgetPassEmailComponent {
   public isLoading: boolean = false;
   public isResetFailed: boolean = false;
   public isResetSuccess: boolean = false;
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private passwordService: PasswordService,
-    private translateService: TranslateService
-  ) {}
 
   public onSubmit(): void {
     this.forgetForm.controls.email.markAsTouched();

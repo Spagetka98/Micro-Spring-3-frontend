@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IRegistration } from 'src/app/models/registration.model';
 import { UserService } from 'src/app/services/api/user.service';
@@ -24,6 +24,10 @@ import { RouterLink } from '@angular/router';
   ]
 })
 export class RegistrationComponent {  
+  private formBuilder: FormBuilder = inject(FormBuilder);
+  private userService: UserService = inject(UserService);
+  private translateService: TranslateService = inject(TranslateService);
+
   public message?: string;
   public isPasswordHidden: boolean = true;
   public isConfirmPasswordHidden: boolean = true;
@@ -56,12 +60,6 @@ export class RegistrationComponent {
   },{
     validators: [Validation.match('password', 'confirmPassword')]
   });
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private translateService: TranslateService
-  ) {}
 
   onSubmit(): void {
     if(this.userDetailsForm.invalid || this.accountDetailsForm.invalid) return;

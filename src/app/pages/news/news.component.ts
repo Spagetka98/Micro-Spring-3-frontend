@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -23,6 +23,11 @@ import { NewsWindowComponent } from "./components/news/news-window.component";
     ]
 })
 export class NewsComponent implements OnInit {
+  private newsService: NewsService = inject(NewsService);
+  private snackBar: MatSnackBar = inject(MatSnackBar);
+  private storageService: StorageService = inject(StorageService);
+  private translateService: TranslateService = inject(TranslateService);
+
   public currentPage: number = 0;
   public itemsPerPage: number = 5;
   public pageSizeOptions: number[] = [5,10,15,20]
@@ -30,12 +35,6 @@ export class NewsComponent implements OnInit {
   public isLoading: boolean = false;
   public news: INews[] = [];
   public currentUserRole: Role = Role.ROLE_USER;
-  
-  constructor(
-    private newsService: NewsService,
-    private snackBar: MatSnackBar,
-    private storageService: StorageService,
-    private translateService: TranslateService,){}
 
   ngOnInit(): void {
     this.loadUserRole();

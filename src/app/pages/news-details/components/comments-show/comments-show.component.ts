@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { IComment } from 'src/app/models/comment.model';
 import { IPageResponse } from 'src/app/models/page-response.model';
 import { IPage } from 'src/app/models/page.model';
@@ -15,6 +15,8 @@ import { CommentComponent } from "../comment/comment.component";
     imports: [CommonModule, PaginationComponent, CommentComponent]
 })
 export class CommentsShowComponent implements OnInit {
+  private commentService: CommentService = inject(CommentService);
+
   @Input() public isLoading: boolean = false;
   @Input({required:true}) public newsId!: number;
 
@@ -24,8 +26,6 @@ export class CommentsShowComponent implements OnInit {
   public totalPages: number = 0;
 
   public comments: IComment[] = [];
-
-  constructor(private commentService: CommentService){}
 
   ngOnInit(): void {
     this.loadComments();

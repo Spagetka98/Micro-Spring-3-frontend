@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/api/user.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
@@ -12,17 +12,18 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule]
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  private userService: UserService = inject(UserService);
+  private storageService: StorageService = inject(StorageService);
+  private router: Router = inject(Router);
+  
   public isLoading: boolean = false;
   public role: Role = Role.ROLE_USER;
   public Roles = Role;
 
-  constructor(
-    private userService: UserService,
-    private storageService: StorageService,
-    private router: Router) {
-      this.handleRole();
-    }
+  ngOnInit(): void {
+    this.handleRole();
+  }
   
   public logout(): void { 
     this.isLoading = true;
@@ -33,7 +34,7 @@ export class NavbarComponent {
   }
 
   private handleRole(): void {
-    let role = this.storageService.getUserRole();
+    const role = this.storageService.getUserRole();
 
     if(role) 
       this.role = role;

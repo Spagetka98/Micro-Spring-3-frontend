@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { IComment } from 'src/app/models/comment.model';
@@ -14,14 +14,12 @@ import { UserService } from 'src/app/services/api/user.service';
   imports: [CommonModule, MatCardModule, MatProgressBarModule]
 })
 export class CommentComponent implements OnInit {
+  private userService: UserService = inject(UserService);
+  
   @Input({required:true}) public comment!: IComment;
 
   public isLoading: boolean = false;
   public author?: IUser;
-
-  constructor(
-    private userService: UserService
-  ) {}
 
   ngOnInit(): void {
     this.loadAuthorDetails(this.comment.authId);

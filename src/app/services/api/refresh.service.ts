@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_GET_REFRESH_JWT } from './api.path';
 
@@ -7,9 +7,9 @@ import { API_GET_REFRESH_JWT } from './api.path';
   providedIn: 'root',
 })
 export class RefreshService {
-  constructor(private _http: HttpClient) {}
+  private http: HttpClient = inject(HttpClient);
 
   public refreshJWT(): Observable<{}> {
-    return this._http.get(API_GET_REFRESH_JWT);
+    return this.http.get(API_GET_REFRESH_JWT);
   }
 }

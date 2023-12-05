@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { EmailService } from 'src/app/services/api/email.service';
@@ -13,16 +13,14 @@ import { EmailService } from 'src/app/services/api/email.service';
   imports: [CommonModule, TranslateModule, RouterLink]
 })
 export class EmailVerificationComponent implements OnInit {
+  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private emailService: EmailService = inject(EmailService);
+  private translateService: TranslateService = inject(TranslateService)
+  
   public message?: string;
   public isLoading: boolean = false;
   public isValidationFailed: boolean = false;
   public isValidationSuccess: boolean = false;
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private emailService: EmailService,
-    private translateService: TranslateService
-  ) {}
 
   ngOnInit(): void {
     const token = this.activatedRoute.snapshot.paramMap.get("token");

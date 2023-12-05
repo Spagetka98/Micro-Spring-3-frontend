@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -22,28 +22,24 @@ import { MatIconModule } from '@angular/material/icon';
   ]
 })
 export class ResetPassComponent implements OnInit {
+  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private formBuilder: FormBuilder = inject(FormBuilder);
+  private passwordService: PasswordService = inject(PasswordService);
+  private translateService: TranslateService = inject(TranslateService);
+  private token?: string;
+
   public resetForm = this.formBuilder.group({
     password: ['', [Validators.required, Validators.min(8), Validators.pattern(PASSWORD_REGEX)]],
     confirmPassword: ['', [Validators.required]],
   },{
     validators: [Validation.match('password', 'confirmPassword')]
   });
-
   public message?: string;
   public isResetSuccess: boolean = false;
   public isResetFailed: boolean = false;
   public isPasswordHidden: boolean = true;
   public isConfirmPasswordHidden: boolean = true;
   public isLoading: boolean = false;
-
-  private token?: string;
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private passwordService: PasswordService,
-    private translateService: TranslateService
-  ) {}
 
   ngOnInit(): void {
     const token = this.activatedRoute.snapshot.paramMap.get("token");

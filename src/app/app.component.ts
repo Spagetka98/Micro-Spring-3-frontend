@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -7,11 +7,13 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private _translate: TranslateService){
-    _translate.setDefaultLang("cs");
+  private translateService: TranslateService = inject(TranslateService);
+  
+  constructor(){
+    this.translateService.setDefaultLang("cs");
   }
 
   switchLanguage(language: string){
-    this._translate.use(language);
+    this.translateService.use(language);
   }
 }

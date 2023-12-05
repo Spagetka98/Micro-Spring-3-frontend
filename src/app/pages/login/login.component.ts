@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/api/user.service';
 import { StorageService } from '../../services/storage/storage.service';
@@ -10,7 +10,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +21,13 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     TranslateModule, ReactiveFormsModule, MatInputModule
   ],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  private formBuilder: FormBuilder = inject(FormBuilder);
+  private userService: UserService = inject(UserService);
+  private storageService: StorageService = inject(StorageService);
+  private routerService: Router = inject(Router);
+  private translateService: TranslateService = inject(TranslateService);
+
   public loginForm = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
@@ -32,13 +37,7 @@ export class LoginComponent {
   public isPasswordHidden: boolean = true;
   public isLoading: boolean = false;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private storageService: StorageService,
-    private routerService: Router,
-    private translateService: TranslateService,
-  ) {
+  ngOnInit(): void {
     if(history.state?.loginExpiration){
       this.translateService.get("LOGIN.ERRORS.EXPIRATION").subscribe(data => this.message = data)
       this.isErrorReceived = true;

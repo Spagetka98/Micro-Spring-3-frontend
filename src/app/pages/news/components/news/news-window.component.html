@@ -4,7 +4,7 @@
             <img src="{{IMG_PATH}}/{{news.newsId}}" alt="mat-card-avatar">
         </div>
         <mat-card-title *ngIf="!isLoading">{{username}}</mat-card-title>
-        <mat-card-subtitle *ngIf="!isLoading">{{role | translate}}</mat-card-subtitle>         
+        <mat-card-subtitle *ngIf="!isLoading && role">{{role | translate}}</mat-card-subtitle>     
         <mat-progress-bar class="mb-3" *ngIf="isLoading" mode="buffer"></mat-progress-bar>
     </mat-card-header>
     <img mat-card-image style="max-height: 90vh;" src="{{IMG_PATH}}/{{news.newsId}}" class="img-fluid shadow" alt="thumbnail">

@@ -8,8 +8,6 @@ import { Role } from 'src/app/enums/role.enum';
 export class StorageService {
   private readonly USER_KEY: string = "USER_DATA";
 
-  constructor() { }
-
   public cleanStorage(): void {
     window.sessionStorage.clear();
   }
