@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
 import { OnInit , Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Role } from 'src/app/enums/role.enum';
 import { INews } from 'src/app/models/news.model';
 import { IUser } from 'src/app/models/user.model';
@@ -20,13 +20,15 @@ import { UserService } from 'src/app/services/api/user.service';
   standalone: true,
   imports: [
     CommonModule, MatCardModule, TranslateModule, MatProgressBarModule, RouterLink,
-    MatButtonModule
+    MatButtonModule, MatSnackBarModule
   ]
 })
 export class NewsWindowComponent implements OnInit {
   private userService: UserService = inject(UserService);
   private newsService: NewsService = inject(NewsService);
-
+  private translateService: TranslateService = inject(TranslateService);
+  private snackBar: MatSnackBar = inject(MatSnackBar);
+  
   @Input({ required: true }) news!: INews; 
   @Input() isLoading: boolean = false;
   @Input() currentUserRole: Role = Role.ROLE_USER;
@@ -70,7 +72,7 @@ export class NewsWindowComponent implements OnInit {
         this.username = data.username;
         this.role = data.role.toString();
       },
-      error: (err) => this.handleError(err),
+      error: () =>this.openSnackBar("SNACK_BAR.NEWS_WINDOW_USER_DETAILS_FAILED"),
     }).add(() => this.isLoading = false); 
   }
 
@@ -83,7 +85,7 @@ export class NewsWindowComponent implements OnInit {
         this.news.isLikedByUser = true;
         this.news.isDislikedByUser = false;
       },
-      error: (err) => this.handleError(err),
+      error: () => this.openSnackBar("SNACK_BAR.NEWS_WINDOW_USER_ACTION_FAILED"),
     }).add(() => this.isLoading = false);
   }
 
@@ -95,7 +97,7 @@ export class NewsWindowComponent implements OnInit {
       next: () => {
         this.news.isLikedByUser = false;
       },
-      error: (err) => this.handleError(err),
+      error: () => this.openSnackBar("SNACK_BAR.NEWS_WINDOW_USER_ACTION_FAILED"),
     }).add(() => this.isLoading = false);
   }
 
@@ -108,7 +110,7 @@ export class NewsWindowComponent implements OnInit {
         this.news.isDislikedByUser = true;
         this.news.isLikedByUser = false;
       },
-      error: (err) => this.handleError(err),
+      error: () => this.openSnackBar("SNACK_BAR.NEWS_WINDOW_USER_ACTION_FAILED"),
     }).add(() => this.isLoading = false);
   }
 
@@ -120,12 +122,16 @@ export class NewsWindowComponent implements OnInit {
       next: () => {
         this.news.isDislikedByUser = false;
       },
-      error: (err) => this.handleError(err),
+      error: () => this.openSnackBar("SNACK_BAR.NEWS_WINDOW_USER_ACTION_FAILED"),
     }).add(() => this.isLoading = false);
   }
 
-  private handleError(err: HttpErrorResponse): void {
-    throw new Error('Method not implemented.');
+  private openSnackBar(textKey: string, duration: number = 3000): void {
+    this.translateService.get(textKey).subscribe(msg => {
+        this.snackBar.open(msg, '', {
+          duration: duration
+        });
+    })
   }
 
 }

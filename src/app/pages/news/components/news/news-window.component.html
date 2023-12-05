@@ -3,7 +3,7 @@
         <div *ngIf="!isLoading" mat-card-avatar class="overflow-hidden">
             <img src="{{IMG_PATH}}/{{news.newsId}}" alt="mat-card-avatar">
         </div>
-        <mat-card-title *ngIf="!isLoading">{{username}}</mat-card-title>
+        <mat-card-title *ngIf="!isLoading && username">{{username}}</mat-card-title>
         <mat-card-subtitle *ngIf="!isLoading && role">{{role | translate}}</mat-card-subtitle>     
         <mat-progress-bar class="mb-3" *ngIf="isLoading" mode="buffer"></mat-progress-bar>
     </mat-card-header>

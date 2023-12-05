@@ -121,7 +121,11 @@
     "SNACK_BAR": {
         "NEWS_DELETE_SUCCESS": "Zpráva byla smazána!",
         "NEWS_DELETE_FAILED": "Zprávu se nepodařilo smazat!",
-        "NEWS_LOAD_FAILED": "Oops! Něco se pokazilo!"
+        "NEWS_LOAD_FAILED": "Oops! Něco se pokazilo!",
+        "NEWS_WINDOW_USER_DETAILS_FAILED": "Oops! Nepodařilo se načíst informace o uživatelích!",
+        "NEWS_WINDOW_USER_ACTION_FAILED": "Oops! Nepodařilo se provést danou akci!",
+        "NEWS_DETAILS_USER_DETAILS_FAILED": "Oops! Nepodařilo se načíst informace o uživatelích!",
+        "NEWS_DETAILS_NEWS_DETAILS_FAILED": "Oops! Nepodařilo se načíst informace o článku!"
     },
     "NEWS": {
         "ADD_LIKE": "To se mi líbí!",
