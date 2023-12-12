@@ -27,7 +27,8 @@ export class NewsDetailsComponent implements OnInit {
   public isLoading: boolean = false;
   public news?: INews;
   public author?: IUser;
-  public IMG_PATH: string = API_GET_NEWS_IMG
+  public IMG_PATH_START: string = API_GET_NEWS_IMG.START;
+  public IMG_PATH_END: string = API_GET_NEWS_IMG.END;
 
   ngOnInit(): void {
     const id: string | null = this.activatedRoute.snapshot.paramMap.get("id");

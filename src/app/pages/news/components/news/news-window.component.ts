@@ -39,8 +39,9 @@ export class NewsWindowComponent implements OnInit {
   public username?: string;
   public role?: string;
   public Roles = Role
-  public IMG_PATH: string = API_GET_NEWS_IMG;
-  
+  public IMG_PATH_START: string = API_GET_NEWS_IMG.START;
+  public IMG_PATH_END: string = API_GET_NEWS_IMG.END;
+
   ngOnInit() {
     this.loadAuthorDetails();
   }
