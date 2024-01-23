@@ -44,9 +44,11 @@ export class NewsDetailsComponent implements OnInit {
         this.news = data
         this.loadAuthorDetails(this.news.userId)
       },
-      error: () => this.openSnackBar("SNACK_BAR.NEWS_DETAILS_NEWS_DETAILS_FAILED"),
+      error: () => {
+        this.openSnackBar("SNACK_BAR.NEWS_DETAILS_NEWS_DETAILS_FAILED")
+        this.isLoading = false;
+      },
     })
-    .add(() => this.isLoading = false);
   }
 
   private loadAuthorDetails(userId: string): void {
