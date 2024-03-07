@@ -1,5 +1,14 @@
-<app-pagination  (onPageChange)="onPageChange($event)" [currentPage]="currentPage" [totalPages]="totalPages" [pageSizeOptions]="pageSizeOptions" [itemsShowCount]="itemsPerPage" [isLoading]="isLoading"></app-pagination> 
+@defer (on viewport) {
+    <app-pagination (onPageChange)="onPageChange($event)" [currentPage]="currentPage" [totalPages]="totalPages" [pageSizeOptions]="pageSizeOptions" [itemsShowCount]="itemsPerPage" [isLoading]="isLoading"></app-pagination> 
 
-<div class="border-top border-dark">
-    <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
-</div>
+    <div class="border-top border-dark d-flex flex-column">
+        @for (comment of comments; track comment.commentId) {
+            <app-comment [comment]="comment"></app-comment>
+        }@empty {
+            <span class="text-center w-100 align-self-center my-4 fw-light fs-5">Zatím nebyl přidán žádný komentář!</span>
+        }
+    </div>
+} @placeholder {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+

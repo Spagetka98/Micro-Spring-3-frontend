@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md bg-light shadow">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" routerLink="#">
         <img src="https://www.svgrepo.com/show/530364/lemon.svg" alt="navbar-logo"  width="40" height="30"> 
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,18 +8,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto ">
-          <li *ngIf="role === Roles.ROLE_USER" class="nav-item">
-            <a class="nav-link active" aria-current="page" href="news">Novinky</a>
-          </li>
-          <li *ngIf="role !== Roles.ROLE_USER" class="nav-item dropdown">
-            <a class="nav-link active dropdown-toggle" href="news" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Novinky
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="news">Zobrazit</a></li>
-              <li><a class="dropdown-item" href="news/create">Vytvořit</a></li>
-            </ul>
-          </li>       
+          @if (role !== Roles.ROLE_USER) {
+            <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Novinky
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" routerLink="news">Zobrazit</a></li>
+                <li><a class="dropdown-item" routerLink="news/create">Vytvořit</a></li>
+              </ul>
+            </li> 
+          } @else if (role === Roles.ROLE_USER) {
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="news">Novinky</a>
+            </li>
+          }      
         </ul>
         <button class="btn btn-danger" (click)="logout()" [disabled]="isLoading" type="submit">Odhlásit</button>
       </div>

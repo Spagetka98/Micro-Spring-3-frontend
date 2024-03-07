@@ -6,13 +6,15 @@ import { IPage } from 'src/app/models/page.model';
 import { CommentService } from 'src/app/services/api/comment.service';
 import { PaginationComponent } from "../../../../components/pagination/pagination.component";
 import { CommentComponent } from "../comment/comment.component";
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
     selector: 'app-comments-show',
     templateUrl: './comments-show.component.html',
     styleUrls: ['./comments-show.component.css'],
     standalone: true,
-    imports: [CommonModule, PaginationComponent, CommentComponent]
+    imports: [CommonModule, PaginationComponent, CommentComponent, MatMenuModule, MatProgressBarModule]
 })
 export class CommentsShowComponent implements OnInit {
   private commentService: CommentService = inject(CommentService);

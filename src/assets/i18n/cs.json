@@ -116,7 +116,8 @@
     },
     "PAGINATION": {
         "SHOW": "Zobrazování:",
-        "FROM": "z"
+        "FROM": "z",
+        "NO_PAGINATION_OPTIONS":"Něco se pokazilo!"
     },
     "SNACK_BAR": {
         "NEWS_DELETE_SUCCESS": "Zpráva byla smazána!",

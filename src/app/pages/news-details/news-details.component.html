@@ -13,9 +13,9 @@
                 <div class="d-flex justify-content-center align-items-center">
                     <h2 class="fw-semibold mb-1">{{"NEWS_DETAILS.COMMENTS" | translate}} <span class="badge text-bg-warning">{{news.totalComments}}</span></h2>
                 </div>
-                <ng-container *ngIf="news.totalComments > 0">
-                   <app-comments-show [newsId]="news.newsId" [isLoading]="isLoading"></app-comments-show>
-                </ng-container>
+                @if (news.totalComments > 0) {
+                    <app-comments-show [newsId]="news.newsId" [isLoading]="isLoading"></app-comments-show>
+                }
             </section>
         </div>
     </article>

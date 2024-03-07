@@ -25,6 +25,10 @@ const routes: Routes = [
             component: NewsComponent
           },
           {
+            path:'create',
+            component: LoginComponent
+          },
+          {
             path: 'details/:id',
             component: NewsDetailsComponent
           }

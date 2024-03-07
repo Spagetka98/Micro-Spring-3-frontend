@@ -4,8 +4,12 @@
             <button mat-button [matMenuTriggerFor]="menu">
                 {{"PAGINATION.SHOW" | translate}} {{itemsShowCount}} <i class="bi bi-chevron-down"></i> 
             </button>
-            <mat-menu #menu="matMenu" >
-                <button *ngFor="let option of pageSizeOptions" mat-menu-item [disabled]="isLoading" (click)="onCountUpdated(option)">{{option}}</button>
+            <mat-menu #menu="matMenu">
+                @for(option of pageSizeOptions; track option){
+                    <button mat-menu-item [disabled]="isLoading" (click)="onCountUpdated(option)">{{option}}</button>
+                }@empty {
+                    <button mat-menu-item [disabled]="true" class="d-flex justify-content-center">{{"PAGINATION.NO_PAGINATION_OPTIONS" | translate}} <i class="bi bi-emoji-frown"></i></button>
+                }
             </mat-menu>  
             <button class="d-md-none" mat-button [disabled]="isLoading" (click)="emitPageChange()"><i class="bi bi-arrow-clockwise"></i></button>
         </div>

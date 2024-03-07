@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UserService } from 'src/app/services/api/user.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { Role } from '../../enums/role.enum';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, RouterModule]
 })
 export class NavbarComponent implements OnInit {
   private userService: UserService = inject(UserService);

@@ -3,12 +3,16 @@
         <div class="row">    
             <app-pagination (onPageChange)="onPageChange($event)" [currentPage]="currentPage" [totalPages]="totalPages" [pageSizeOptions]="pageSizeOptions" [itemsShowCount]="itemsPerPage" [isLoading]="isLoading"></app-pagination>   
         </div>
-        <div class="row" *ngIf="isLoading" >
+        @if (isLoading) {
+        <div class="row">
             <mat-progress-bar mode="buffer"></mat-progress-bar>
-        </div>
+        </div>  
+        }   
     </div>
 
-    <div *ngIf="news.length > 0" class="row mb-4">
-        <app-news-window [news]="data" [currentUserRole]="currentUserRole" [isLoading]="isLoading" (onDelete)="deleteNews($event)" *ngFor="let data of news"></app-news-window>
+    <div class="row mb-4">
+        @for (data of news; track data.newsId) {
+            <app-news-window [news]="data" [currentUserRole]="currentUserRole" [isLoading]="isLoading" (onDelete)="deleteNews($event)"></app-news-window>
+        }
     </div>
 </main>
